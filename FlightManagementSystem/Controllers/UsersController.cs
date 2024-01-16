@@ -15,21 +15,20 @@ namespace FlightManagementSystem.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly IService<User> _service;
 
-        public UsersController(DataContext context)
+        public UsersController(DataContext context, IService<User> service)
         {
             _context = context;
+            _service = service;
         }
 
         // GET: api/Users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-          if (_context.Users == null)
-          {
-              return NotFound();
-          }
-            return await _context.Users.ToListAsync();
+            var list = await _service.GetAllAsync();
+            return Ok(list);
         }
 
         // GET: api/Users/5

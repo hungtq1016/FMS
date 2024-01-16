@@ -1,6 +1,7 @@
 global using Data.Data;
 global using Share.Entities;
 global using Share.DTOs;
+global using Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>();
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 
 var app = builder.Build();
 
