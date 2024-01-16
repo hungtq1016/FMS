@@ -1,4 +1,6 @@
-﻿namespace Share.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Share.DTOs
 {
     public class RegisterRequest
     {
