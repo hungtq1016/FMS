@@ -1,4 +1,6 @@
 global using Data.Data;
+global using Share.Entities;
+global using Share.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<DataContext>();
 
 var app = builder.Build();
 
@@ -18,7 +21,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-builder.Services.AddDbContext<DataContext>();
 
 app.UseHttpsRedirection();
 
