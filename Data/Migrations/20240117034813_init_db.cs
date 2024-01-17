@@ -10,20 +10,7 @@ namespace Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Statuses",
-                columns: table => new
-                {
-                    ID = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false),
-                    NAME = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    HEX_CODE = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Statuses", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
+                name: "USERS",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false),
@@ -36,33 +23,18 @@ namespace Data.Migrations
                     REFRESH_TOKEN_EXPIRED_TIME = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ENABLE = table.Column<bool>(type: "bit", nullable: false),
                     CREATED_AT = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UPDATED_AT = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    STATUS_ID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    STATUS_ID1 = table.Column<string>(type: "varchar(36)", nullable: true)
+                    UPDATED_AT = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Users_Statuses_STATUS_ID1",
-                        column: x => x.STATUS_ID1,
-                        principalTable: "Statuses",
-                        principalColumn: "ID");
+                    table.PrimaryKey("PK_USERS", x => x.ID);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_STATUS_ID1",
-                table: "Users",
-                column: "STATUS_ID1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Statuses");
+                name: "USERS");
         }
     }
 }

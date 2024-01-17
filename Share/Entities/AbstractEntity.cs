@@ -18,11 +18,5 @@ namespace Share.Entities
 
         [Column("UPDATED_AT")]
         public DateTime UpdatedAt { get; set; }
-
-        [Column("STATUS_ID")]
-        public string StatusId { get; set; }
-
-        [ForeignKey("STATUS_ID")]
-        public Status Status { get; set; } = null!;
     }
 }

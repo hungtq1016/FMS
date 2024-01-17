@@ -22,30 +22,6 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Share.Entities.Status", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("varchar(36)")
-                        .HasColumnName("ID");
-
-                    b.Property<string>("HexCode")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("HEX_CODE");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("NAME");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Statuses");
-                });
-
             modelBuilder.Entity("Share.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -95,15 +71,6 @@ namespace Data.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("REFRESH_TOKEN_EXPIRED_TIME");
 
-                    b.Property<string>("STATUS_ID")
-                        .HasColumnType("varchar(36)")
-                        .HasColumnName("STATUS_ID1");
-
-                    b.Property<string>("StatusId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("STATUS_ID");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2")
                         .HasColumnName("UPDATED_AT");
@@ -116,18 +83,7 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("STATUS_ID");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Share.Entities.User", b =>
-                {
-                    b.HasOne("Share.Entities.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("STATUS_ID");
-
-                    b.Navigation("Status");
+                    b.ToTable("USERS");
                 });
 #pragma warning restore 612, 618
         }

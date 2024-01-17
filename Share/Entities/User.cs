@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Share.Entities
 {
+    [Table("USERS")]
     public class User : AbstractEntity
     {
         [Column("FULL_NAME", TypeName = "nvarchar"), MaxLength(150)]
