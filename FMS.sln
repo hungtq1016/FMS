@@ -5,15 +5,15 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthService", "AuthService", "{0212533B-1CA3-4F60-9DB4-75D69432D9FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{F76B43BD-BF78-422B-AFEC-AD75A42CB119}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared.csproj", "{F76B43BD-BF78-422B-AFEC-AD75A42CB119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayAPI", "src\GatewayAPI\GatewayAPI.csproj", "{73B60742-5B83-40C0-BC33-9E72F8A77D4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayAPI", "src\GatewayAPI\GatewayAPI.csproj", "{73B60742-5B83-40C0-BC33-9E72F8A77D4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthAPI", "src\AuthService\AuthAPI\AuthAPI.csproj", "{81756AB0-7B0B-4082-9271-DFD6195C4D76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI", "src\AuthService\AuthAPI\AuthAPI.csproj", "{81756AB0-7B0B-4082-9271-DFD6195C4D76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthAPI.Service", "src\AuthService\AuthAPI.Service\AuthAPI.Service.csproj", "{6A4A5F2D-E51A-4DC7-A98B-A05D1C2E839B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI.Service", "src\AuthService\AuthAPI.Service\AuthAPI.Service.csproj", "{6A4A5F2D-E51A-4DC7-A98B-A05D1C2E839B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthContext", "src\AuthService\AuthContext\AuthContext.csproj", "{188482A9-D02A-4ED7-8ADD-792BFE7F2FC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthContext", "src\AuthService\AuthContext\AuthContext.csproj", "{188482A9-D02A-4ED7-8ADD-792BFE7F2FC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
