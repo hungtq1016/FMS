@@ -1,5 +1,4 @@
-﻿using Service.Repositories;
-using Service.Services;
+﻿using Infrastructure;
 using Shared.DTOs;
 using Shared.Entities;
 using BC = BCrypt.Net.BCrypt;

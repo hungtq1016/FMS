@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shared.Entities;
-using AuthContext;
 using BC = BCrypt.Net.BCrypt;
+using Infrastructure;
+using Shared.Entities;
 
-namespace Service.Repositories
+namespace Service
 {
     public interface IAuthenticateRepository
     {
@@ -14,9 +14,9 @@ namespace Service.Repositories
 
     public class AuthenticateRepository : IAuthenticateRepository
     {
-        private readonly DataContext _context;
+        private readonly SharedContext _context;
 
-        public AuthenticateRepository(DataContext context)
+        public AuthenticateRepository(SharedContext context)
         {
             _context = context;
         }
