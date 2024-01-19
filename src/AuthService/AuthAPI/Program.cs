@@ -5,6 +5,7 @@ using Service.Repositories;
 using Service.Services;
 using Service;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -50,6 +51,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+var context = services.GetRequiredService<DataContext>();
+/*
+if (context.Database.GetPendingMigrations().Any())
+{
+    context.Database.Migrate();
+}*/
+
+app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 app.UseAuthentication();
 
 app.UseHttpsRedirection();

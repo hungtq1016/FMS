@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service;
 using Shared.DTOs;
-using Shared.DTOs;
 
 namespace FlightManagementSystem.Controllers
 {

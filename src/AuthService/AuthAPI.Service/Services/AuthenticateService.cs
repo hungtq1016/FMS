@@ -1,7 +1,6 @@
 ﻿using Service.Repositories;
 using Service.Services;
 using Shared.DTOs;
-using Shared.DTOs.Authenticate;
 using Shared.Entities;
 using BC = BCrypt.Net.BCrypt;
 
