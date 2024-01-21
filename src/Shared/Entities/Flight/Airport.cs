@@ -9,6 +9,9 @@ namespace Shared.Entities
         [Column("NAME", TypeName = "nvarchar"), MaxLength(150)]
         public string Name { get; set; }
 
+        [Column("SHORT_NAME", TypeName = "nvarchar"), MaxLength(10)]
+        public string ShortName { get; set; }
+
         [Column("CITY", TypeName = "nvarchar"), MaxLength(150)]
         public string City { get; set; }
 

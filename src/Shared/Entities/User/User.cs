@@ -27,6 +27,11 @@ namespace Shared.Entities
         [Column("REFRESH_TOKEN_EXPIRED_TIME")]
         public DateTime RefreshTokenExpiredTime { get; set; }
 
+        [Column("IMAGE_ID", TypeName = "varchar"), MaxLength(36)]
+        [ForeignKey("AvatarImage")]
+        public string ImageId { get; set; }
+        public Image AvatarImage { get; set; }
+
         public ICollection<UserRole> Roles { get; } = new List<UserRole>();
     }
 }

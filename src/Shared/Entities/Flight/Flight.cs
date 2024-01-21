@@ -16,8 +16,14 @@ namespace Shared.Entities
         public string UnloadingId { get; set; }
         public Airport UnLoading { get; set; }
 
+        [Column("DEPARTURE_DATE")]
+        public DateTime DepartureDate { get; set; }
+
         [Column("STATUS", TypeName = "nvarchar"), MaxLength(100)]
         public string Status { get; set; }
+
+        [Column("ROUTE", TypeName = "nvarchar"), MaxLength(50)]
+        public string Route { get; set; }
 
         [Column("DATE_TIME")]
         public DateTime DateTime { get; set; }
