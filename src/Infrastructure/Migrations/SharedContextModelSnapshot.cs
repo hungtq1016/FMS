@@ -61,7 +61,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AIRPORTS");
+                    b.ToTable("AIRPORTS", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.Document", b =>
@@ -110,7 +110,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("FlightId");
 
-                    b.ToTable("DOCUMENTS");
+                    b.ToTable("DOCUMENTS", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.Flight", b =>
@@ -160,7 +160,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UnloadingId");
 
-                    b.ToTable("FLIGHTS");
+                    b.ToTable("FLIGHTS", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.ResetPassword", b =>
@@ -194,7 +194,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RESET_PASSWORD");
+                    b.ToTable("RESET_PASSWORD", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.Role", b =>
@@ -230,7 +230,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ROLES");
+                    b.ToTable("ROLES", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.RolePermission", b =>
@@ -274,7 +274,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("ROLE_PERMISSION");
+                    b.ToTable("ROLE_PERMISSION", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.User", b =>
@@ -338,7 +338,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("USERS");
+                    b.ToTable("USERS", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.UserRole", b =>
@@ -377,7 +377,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("USER_ROLE");
+                    b.ToTable("USER_ROLE", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.Document", b =>
