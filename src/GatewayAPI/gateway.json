@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/Authenticate",
+      "DownstreamPathTemplate": "/api/Authenticate/{any}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,19 +9,19 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/Authenticate",
+      "UpstreamPathTemplate": "/Authenticate/{any}",
       "UpstreamHttpMethod": [ "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/Users",
+      "DownstreamPathTemplate": "/api/Documents",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5003
         }
       ],
-      "UpstreamPathTemplate": "/Users",
+      "UpstreamPathTemplate": "/documents",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
     }
   ],

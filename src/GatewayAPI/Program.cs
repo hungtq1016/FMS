@@ -1,3 +1,4 @@
+using Infrastructure;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -11,6 +12,7 @@ IConfiguration config = builder.Configuration.SetBasePath(builder.Environment.Co
 builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOcelot(config);
+
 
 // In Configure method
 

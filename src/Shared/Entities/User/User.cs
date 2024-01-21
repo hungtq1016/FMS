@@ -26,5 +26,7 @@ namespace Shared.Entities
 
         [Column("REFRESH_TOKEN_EXPIRED_TIME")]
         public DateTime RefreshTokenExpiredTime { get; set; }
+
+        public ICollection<UserRole> Roles { get; } = new List<UserRole>();
     }
 }

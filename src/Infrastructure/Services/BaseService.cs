@@ -1,6 +1,6 @@
 ﻿using Shared.Entities;
 
-namespace Service
+namespace Infrastructure
 {
     public interface IService<T> where T : AbstractEntity
     {

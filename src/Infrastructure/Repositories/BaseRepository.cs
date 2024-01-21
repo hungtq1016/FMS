@@ -1,8 +1,7 @@
-﻿using AuthContext;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Shared.Entities;
 
-namespace Service
+namespace Infrastructure
 {
     public interface IRepository<T> where T : AbstractEntity
     {
@@ -16,10 +15,10 @@ namespace Service
 
     public class Repository<T> : IRepository<T> where T : AbstractEntity
     {
-        private readonly DataContext _context;
+        private readonly SharedContext _context;
         private DbSet<T> _entity;
 
-        public Repository(DataContext context)
+        public Repository(SharedContext context)
         {
             _context = context;
             _entity = _context.Set<T>();
