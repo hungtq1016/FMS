@@ -4,16 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Shared.Entities
 {
     [Table("DOCUMENTS")]
-    public class Document : AbstractEntity
+    public class Document : AbstractFile
     {
-        [Column("NAME", TypeName = "nvarchar"), MaxLength(150)]
-        public string Name { get; set; }
-
         [Column("TYPE", TypeName = "nvarchar"), MaxLength(50)]
         public string Type { get; set; }
 
-        [Column("VERSION", TypeName = "nvarchar"), MaxLength(10)]
-        public string Version { get; set; }
+        public ICollection<DocumentVersion> Versions { get; } = new List<DocumentVersion>();
 
         [Column("FLIGHT_ID", TypeName = "varchar"), MaxLength(36)]
         [ForeignKey("Flight")]
