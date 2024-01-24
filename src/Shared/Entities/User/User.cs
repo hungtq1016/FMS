@@ -29,8 +29,8 @@ namespace Shared.Entities
 
         [Column("IMAGE_ID", TypeName = "varchar"), MaxLength(36)]
         [ForeignKey("AvatarImage")]
-        public string ImageId { get; set; }
-        public Image AvatarImage { get; set; }
+        public string? ImageId { get; set; }
+        public Image? AvatarImage { get; set; } = null!;
 
         public ICollection<UserRole> Roles { get; } = new List<UserRole>();
     }

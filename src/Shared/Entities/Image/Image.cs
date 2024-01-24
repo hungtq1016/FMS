@@ -2,6 +2,6 @@
 {
     public class Image : AbstractFile
     {
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

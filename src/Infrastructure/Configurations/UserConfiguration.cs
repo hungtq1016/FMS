@@ -13,6 +13,11 @@ namespace Infrastructure.Configurations
                 .HasForeignKey(userrole => userrole.UserId)
                 .OnDelete(DeleteBehavior.ClientCascade)
                 .IsRequired(false);
+
+            builder.HasOne(user => user.AvatarImage)
+                .WithOne(image => image.User)
+                .OnDelete(DeleteBehavior.ClientCascade)
+                .IsRequired(false);
         }
     }
 }
