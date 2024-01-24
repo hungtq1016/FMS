@@ -9,17 +9,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "src\Shared\Shared
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayAPI", "src\GatewayAPI\GatewayAPI.csproj", "{73B60742-5B83-40C0-BC33-9E72F8A77D4F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI", "src\AuthService\AuthAPI\AuthAPI.csproj", "{81756AB0-7B0B-4082-9271-DFD6195C4D76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI", "src\Services\AuthService\AuthAPI\AuthAPI.csproj", "{81756AB0-7B0B-4082-9271-DFD6195C4D76}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI.Service", "src\AuthService\AuthAPI.Service\AuthAPI.Service.csproj", "{6A4A5F2D-E51A-4DC7-A98B-A05D1C2E839B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthAPI.Service", "src\Services\AuthService\AuthAPI.Service\AuthAPI.Service.csproj", "{6A4A5F2D-E51A-4DC7-A98B-A05D1C2E839B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthContext", "src\AuthService\AuthContext\AuthContext.csproj", "{188482A9-D02A-4ED7-8ADD-792BFE7F2FC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthContext", "src\Services\AuthService\AuthContext\AuthContext.csproj", "{188482A9-D02A-4ED7-8ADD-792BFE7F2FC8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentService", "DocumentService", "{78679DF5-1BE8-44E1-8DE2-EAA6C91ACFE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentAPI", "src\DocumentService\DocumentAPI\DocumentAPI.csproj", "{3B8FFE44-69A8-4308-B68A-9BCFB6372D44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentAPI", "src\Services\DocumentService\DocumentAPI\DocumentAPI.csproj", "{3B8FFE44-69A8-4308-B68A-9BCFB6372D44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{C99C3719-15FE-430A-B2B9-8622183C2E08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{C99C3719-15FE-430A-B2B9-8622183C2E08}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RoleService", "RoleService", "{CE903FC5-01C2-48DC-A897-8A80DFCA5A40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{4BEFB1E4-1E1F-468D-8158-DD4D9B84B38B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoleService", "src\Services\RoleService\RoleService\RoleService.csproj", "{34E3FC37-A605-4958-BC26-23890E14667D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,15 +61,23 @@ Global
 		{C99C3719-15FE-430A-B2B9-8622183C2E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C99C3719-15FE-430A-B2B9-8622183C2E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C99C3719-15FE-430A-B2B9-8622183C2E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34E3FC37-A605-4958-BC26-23890E14667D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34E3FC37-A605-4958-BC26-23890E14667D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34E3FC37-A605-4958-BC26-23890E14667D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34E3FC37-A605-4958-BC26-23890E14667D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{0212533B-1CA3-4F60-9DB4-75D69432D9FF} = {4BEFB1E4-1E1F-468D-8158-DD4D9B84B38B}
 		{81756AB0-7B0B-4082-9271-DFD6195C4D76} = {0212533B-1CA3-4F60-9DB4-75D69432D9FF}
 		{6A4A5F2D-E51A-4DC7-A98B-A05D1C2E839B} = {0212533B-1CA3-4F60-9DB4-75D69432D9FF}
 		{188482A9-D02A-4ED7-8ADD-792BFE7F2FC8} = {0212533B-1CA3-4F60-9DB4-75D69432D9FF}
+		{78679DF5-1BE8-44E1-8DE2-EAA6C91ACFE2} = {4BEFB1E4-1E1F-468D-8158-DD4D9B84B38B}
 		{3B8FFE44-69A8-4308-B68A-9BCFB6372D44} = {78679DF5-1BE8-44E1-8DE2-EAA6C91ACFE2}
+		{CE903FC5-01C2-48DC-A897-8A80DFCA5A40} = {4BEFB1E4-1E1F-468D-8158-DD4D9B84B38B}
+		{34E3FC37-A605-4958-BC26-23890E14667D} = {CE903FC5-01C2-48DC-A897-8A80DFCA5A40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A4F0155-66F1-4B13-A4C0-FBB96010E10E}
