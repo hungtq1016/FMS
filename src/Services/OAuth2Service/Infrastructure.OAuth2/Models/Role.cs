@@ -2,7 +2,7 @@
 
 namespace Infrastructure.OAuth2.Models
 {
-    public class Role : EntityRootBase
+    public class Role: Entity
     {
         public string Name { get; set; }
         public string Note { get; set; }

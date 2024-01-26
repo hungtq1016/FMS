@@ -1,14 +1,14 @@
 ﻿using Authenticate.Service.DTOs;
 using Infrastructure.EFCore.DTOs;
 using Infrastructure.EFCore.Repository;
+using Infrastructure.OAuth2.Data.Services;
 using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Models;
-using Infrastructure.OAuth2.Data.Services;
 using System.Linq.Expressions;
 using BC = BCrypt.Net.BCrypt;
 
-namespace AuthenService.Infrastructure.Service
-{
+namespace AuthenService.Infrastructure
+{ 
     public interface IAuthenticateService
     {
         Task<Response<TokenResponse>> LoginAsync(LoginRequest request);
@@ -84,6 +84,5 @@ namespace AuthenService.Infrastructure.Service
                 StatusCode = 200
             };
         }
-
     }
 }

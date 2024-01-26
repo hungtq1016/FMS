@@ -1,12 +1,12 @@
-using AuthenService.Infrastructure;
 using Infrastructure.EFCore.Extensions;
 using Infrastructure.EFCore.Repository;
+using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.Data;
-using Infrastructure.OAuth2.Data.Services;
 using Infrastructure.OAuth2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -19,9 +19,8 @@ builder.Services.AddMemoryCache();
 builder.Services.AddJWT(configuration);
 builder.Services.AddSqlServerDbContext<OAuth2Context>(configuration.GetConnectionString("userDB"));
 
-builder.Services.AddScoped<IAuthenticateService, AuthenticateService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IRepository<User>, OAuth2Repository<User>>();
+builder.Services.AddScoped<IRepository<Role>, OAuth2Repository<Role>>();
+builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
 
 var app = builder.Build();
 
@@ -36,6 +35,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllers();
-
 
 app.Run();
