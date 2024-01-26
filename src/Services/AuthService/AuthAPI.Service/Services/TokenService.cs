@@ -32,7 +32,7 @@ namespace Service
                 AccessToken = GetAccessToken(user),
                 ExpiredTime = DateTime.Now.AddMinutes(ExpiredTime()),
                 RefreshToken = user.RefreshToken,
-                TokenType = "Beared"
+                TokenType = "Bearer"
             };
         }
 
