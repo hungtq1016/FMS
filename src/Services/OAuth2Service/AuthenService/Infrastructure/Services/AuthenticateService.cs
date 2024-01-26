@@ -1,7 +1,6 @@
 ﻿using Authenticate.Service.DTOs;
 using Infrastructure.EFCore.DTOs;
 using Infrastructure.EFCore.Repository;
-using Infrastructure.OAuth2.Data;
 using Infrastructure.OAuth2.Data.Services;
 using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Models;

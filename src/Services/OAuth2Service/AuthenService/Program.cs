@@ -17,11 +17,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddMemoryCache();
 
 builder.Services.AddJWT(configuration);
-builder.Services
-    .AddSqlServerDbContext<OAuth2Context>(
-        configuration.GetConnectionString("userDB"),
-        null,
-        svc => svc.AddRepository(typeof(OAuth2Repository<>)));
+builder.Services.AddSqlServerDbContext<OAuth2Context>(configuration.GetConnectionString("userDB"));
 
 builder.Services.AddScoped<IAuthenticateService, AuthenticateService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
