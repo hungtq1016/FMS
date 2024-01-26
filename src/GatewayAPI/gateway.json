@@ -1,7 +1,7 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/Authenticate/{any}",
+      "DownstreamPathTemplate": "/api/Authenticate/reset-password",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,20 +9,22 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/Authenticate/{any}",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamPathTemplate": "/auth/reset-password",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "auth"
     },
     {
-      "DownstreamPathTemplate": "/api/Documents",
+      "DownstreamPathTemplate": "/api/Authenticate/login",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/documents",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ]
+      "UpstreamPathTemplate": "/auth/login",
+      "UpstreamHttpMethod": [ "Post" ],
+      "SwaggerKey": "auth"
     }
   ],
   "GlobalConfiguration": {
@@ -30,22 +32,22 @@
   },
   "SwaggerEndPoints": [
     {
-      "Key": "contacts",
+      "Key": "auth",
       "Config": [
         {
-          "Name": "Contacts API",
+          "Name": "Authenticate API",
           "Version": "v1",
-          "Url": "http://localhost:5100/swagger/v1/swagger.json"
+          "Url": "https://localhost:5001/swagger/v1/swagger.json"
         }
       ]
     },
     {
-      "Key": "orders",
+      "Key": "document",
       "Config": [
         {
-          "Name": "Orders API",
+          "Name": "Document API",
           "Version": "v1",
-          "Url": "http://localhost:5200/swagger/v1/swagger.json"
+          "Url": "https://localhost:5002/swagger/v1/swagger.json"
         }
       ]
     }

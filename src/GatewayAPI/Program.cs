@@ -5,22 +5,27 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 IConfiguration config = builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
-    .AddJsonFile("gateway.json",optional:false, reloadOnChange: true)
+    .AddJsonFile("gateway.json", optional: false, reloadOnChange: true)
     .Build();
 
 builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOcelot(config);
-
-// In Configure method
+builder.Services.AddSwaggerForOcelot(config);
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
 app.UseRouting();
-app.UseEndpoints(endpoints =>
+
+if (app.Environment.IsDevelopment())
 {
-    endpoints.MapGet("/", () => "Hello from Gateway");
-});
+    app.UseSwagger();
+    app.UseSwaggerForOcelotUI(opt =>
+    {
+        opt.PathToSwaggerGenerator = "/swagger/docs";
+    });
+}
 
 app.UseOcelot().Wait();
 
