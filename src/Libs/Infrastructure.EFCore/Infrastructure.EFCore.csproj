@@ -29,8 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Libs\Core\Core.csproj" />
-    <ProjectReference Include="..\src\Libs\Infrastructure.Main\Infrastructure.Main.csproj" />
+    <ProjectReference Include="..\Core\Core.csproj" />
+    <ProjectReference Include="..\Infrastructure.Main\Infrastructure.Main.csproj" />
   </ItemGroup>
 
 </Project>
