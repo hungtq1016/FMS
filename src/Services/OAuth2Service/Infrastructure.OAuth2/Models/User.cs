@@ -2,7 +2,7 @@
 
 namespace Infrastructure.OAuth2.Models
 {
-    public sealed class User : EntityRootBase
+    public sealed class User : Entity
     {
         public string FullName { get; set; }
         public string Email { get; set; }

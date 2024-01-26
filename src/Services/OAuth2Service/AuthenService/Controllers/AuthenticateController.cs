@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Authenticate.Service.DTOs;
-using Authenticate.Service.Infrastructure.Service;
+using AuthenService.Infrastructure;
+
 namespace Authenticate.Service.Controllers
 {
     [Route("api/[controller]")]
@@ -23,7 +24,7 @@ namespace Authenticate.Service.Controllers
         }
 
         [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
             var result = await _authService.ResetPasswordAsync(request);
             return StatusCode(result.StatusCode, result);

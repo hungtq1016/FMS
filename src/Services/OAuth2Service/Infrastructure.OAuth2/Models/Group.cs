@@ -2,7 +2,7 @@
 
 namespace Infrastructure.OAuth2.Models
 {
-    public class Group : EntityRootBase
+    public class Group: Entity
     {
         public Guid UserId { get; set; }
         public User User { get; set; }

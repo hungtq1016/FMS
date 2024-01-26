@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Infrastructure.EFCore.Repository
 {
-    public interface IRepository<TEntity> where TEntity : IAggregateRoot
+    public interface IRepository<TEntity> where TEntity : Entity
     {
         Task<TEntity> FindByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions, CancellationToken cancellationToken = default);

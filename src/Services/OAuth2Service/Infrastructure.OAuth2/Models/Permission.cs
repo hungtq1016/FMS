@@ -2,7 +2,7 @@
 
 namespace Infrastructure.OAuth2.Models
 {
-    public class Permission : EntityRootBase
+    public class Permission: Entity
     {
         public string Type { get; set; }
         public string Value { get; set; }

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 namespace Infrastructure.EFCore.Repository
 {
     public abstract class RepositoryBase<TDbContext, TEntity> : IRepository<TEntity>
-        where TEntity : class, IAggregateRoot
+        where TEntity : Entity
         where TDbContext : DbContext
     {
         protected readonly TDbContext _context;
