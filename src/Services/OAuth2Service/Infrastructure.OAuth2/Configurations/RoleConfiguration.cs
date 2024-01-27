@@ -24,6 +24,10 @@ namespace Infrastructure.OAuth2.Configurations
                 .HasDefaultValueSql(Constants.DateTimeAlgorithm)
                 .IsRequired(true);
 
+            builder.Property(role => role.Enable)
+                .HasDefaultValue(true)
+                .IsRequired(true);
+
             builder.HasMany(role => role.Groups)
                 .WithOne(group => group.Role)
                 .HasForeignKey(group => group.RoleId)

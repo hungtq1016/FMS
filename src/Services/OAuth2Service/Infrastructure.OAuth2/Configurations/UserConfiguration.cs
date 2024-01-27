@@ -24,6 +24,10 @@ namespace Infrastructure.OAuth2.Configurations
                 .HasDefaultValueSql(Constants.DateTimeAlgorithm)
                 .IsRequired(true);
 
+            builder.Property(user => user.Enable)
+                .HasDefaultValue(true)
+                .IsRequired(true);
+
             builder.Property(user => user.ImageId).HasColumnType("varchar")
                 .HasMaxLength(36)
                 .IsRequired(false);
