@@ -24,6 +24,10 @@ namespace Infrastructure.OAuth2.Configurations
                 .HasDefaultValueSql(Constants.DateTimeAlgorithm)
                 .IsRequired(true);
 
+            builder.Property(permission => permission.Enable)
+                .HasDefaultValue(true)
+                .IsRequired(true);
+
             builder.HasMany(permission => permission.Assignments)
                 .WithOne(assign => assign.Permission)
                 .HasForeignKey(assign => assign.PermissionId)

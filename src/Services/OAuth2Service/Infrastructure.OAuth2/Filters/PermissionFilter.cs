@@ -1,50 +1,52 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
-using Infrastructure.OAuth2.Data;
 using Microsoft.Extensions.Caching.Memory;
 using Infrastructure.OAuth2.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace Infrastructure.OAuth2.Filters
 {
     public class PermissionAttribute : TypeFilterAttribute
     {
-        public PermissionAttribute(string type = null, string value = null) : base(typeof(PermissionFilter))
+        public PermissionAttribute(string? type, string? value) : base(typeof(PermissionFilter))
         {
-            Arguments = new object[] { type, value };
+            Arguments = new object[] { new Claim(type, value) };
         }
     }
 
-    public class PermissionFilter : IAsyncAuthorizationFilter
+    public class PermissionFilter : IAuthorizationFilter
     {
-        private readonly OAuth2Context _context;
         private readonly ILogger<PermissionFilter> _logger;
         private readonly IMemoryCache _memoryCache;
-        private readonly string _type;
-        private readonly string _value;
+        private readonly Claim? _claim;
 
-        public PermissionFilter(string type, string value, OAuth2Context context, ILogger<PermissionFilter> logger, IMemoryCache memoryCache)
+        public PermissionFilter(Claim claim, ILogger<PermissionFilter> logger, IMemoryCache memoryCache)
         {
-            _type = type;
-            _value = value;
-            _context = context;
+            _claim = claim;
             _logger = logger;
             _memoryCache = memoryCache;
         }
 
-        public async Task OnAuthorizationAsync(AuthorizationFilterContext context)
+        public void OnAuthorization(AuthorizationFilterContext context)
         {
+            if (context == null || context.HttpContext == null) return;
+
             var userId = context.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var user = context.HttpContext.User;
+            if (context?.HttpContext?.User?.Claims == null)
+    {
+        _logger.LogError("HttpContext, User, or Claims is null");
+        context.Result = new UnauthorizedResult();
+        return;
+    }
             if (!IsAuthenticated(context, userId)) return;
 
             var permission = $"{context.HttpContext.Request.RouteValues["controller"]}.{context.HttpContext.Request.Method}";
 
-            if (!await HasPermission(new Guid(userId), permission))
+            if (!HasPermission(user,userId,permission))
             {
+                _logger.LogInformation($"{userId} try to connect ${permission} but failed!");
                 context.Result = new ForbidResult();
             }
         }
@@ -59,34 +61,25 @@ namespace Infrastructure.OAuth2.Filters
             return true;
         }
 
-        private async Task<bool> HasPermission(Guid userId, string permission)
+        private bool HasPermission(ClaimsPrincipal principal, string userId, string permission)
         {
+
             if (!_memoryCache.TryGetValue(userId, out List<Permission> permissions))
             {
-                permissions = await LoadPermissionsFromDb(userId);
                 _memoryCache.Set(userId, permissions);
             }
 
-            return CheckPermission(permissions, permission);
+            return CheckPermission(principal,permission);
         }
 
-        private async Task<List<Permission>> LoadPermissionsFromDb(Guid userId)
+        private bool CheckPermission(ClaimsPrincipal principal, string permission)
         {
-            return await _context.Users
-                .Where(u => u.Id == userId)
-                .SelectMany(u => u.Groups)
-                .SelectMany(g => g.Role.Assignments)
-                .Select(a => a.Permission)
-                .Distinct()
-                .ToListAsync();
-        }
+            var claimsValue = principal.Claims;
+            string permissionLower = permission.ToLower();
 
-        private bool CheckPermission(List<Permission> permissions, string permission)
-        {
-            var permissionLower = permission.ToLower();
-            return permissions.Any(p =>
+            return principal.Claims.Any(p =>
                 (p.Type.ToLower() == "controller" && p.Value.ToLower() == permissionLower) ||
-                (p.Type.ToLower() == _type?.ToLower() && p.Value.ToLower() == _value?.ToLower()) ||
+                (p.Type.ToLower() == _claim.Type?.ToLower() && p.Value.ToLower() == _claim.Value?.ToLower()) ||
                 (p.Type.ToLower() == "admin" && p.Value.ToLower() == "all"));
         }
     }

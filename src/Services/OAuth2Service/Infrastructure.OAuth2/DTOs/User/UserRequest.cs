@@ -1,15 +1,10 @@
-﻿using Core;
-
-namespace Infrastructure.OAuth2.Models
+﻿namespace Infrastructure.OAuth2.DTOs
 {
-    public class User : Entity
+    public class UserRequest
     {
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
-        public Guid? ImageId { get; set; }
-
-        public ICollection<Group>? Groups { get; set; }
     }
 }

@@ -36,7 +36,7 @@
         }
       ],
       "UpstreamPathTemplate": "/roles",
-      "UpstreamHttpMethod": [ "Get", "Post","Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "SwaggerKey": "role"
     },
     {
@@ -51,6 +51,32 @@
       "UpstreamPathTemplate": "/roles/{id}",
       "UpstreamHttpMethod": [ "Put", "Delete", "Get" ],
       "SwaggerKey": "role"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/users",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "SwaggerKey": "user"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/users/{id}",
+      "UpstreamHttpMethod": [ "Put", "Delete", "Get" ],
+      "SwaggerKey": "user"
     }
   ],
   "GlobalConfiguration": {
@@ -74,6 +100,16 @@
           "Name": "Role API",
           "Version": "v1",
           "Url": "https://localhost:5003/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "user",
+      "Config": [
+        {
+          "Name": "User API",
+          "Version": "v1",
+          "Url": "https://localhost:5005/swagger/v1/swagger.json"
         }
       ]
     }

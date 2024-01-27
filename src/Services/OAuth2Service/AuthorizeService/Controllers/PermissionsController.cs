@@ -7,9 +7,9 @@ namespace AuthorizeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : AbstactController<Role,RoleRequest,RoleResponse>
+    public class PermissionsController : AbstactController<Permission, PermissionRequest, PermissionResponse>
     {
-        public RolesController(IService<Role,RoleRequest,RoleResponse> service) : base(service)
+        public PermissionsController(IService<Permission, PermissionRequest,PermissionResponse> service) : base(service)
         {
         }
     }

@@ -18,10 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libs\Core\Core.csproj" />
-    <ProjectReference Include="..\..\..\Libs\Infrastructure.EFCore\Infrastructure.EFCore.csproj" />
-    <ProjectReference Include="..\..\..\Libs\Infrastructure.Main\Infrastructure.Main.csproj" />
-    <ProjectReference Include="..\Infrastructure.OAuth2\Infrastructure.OAuth2.csproj" />
+    <ProjectReference Include="..\..\Libs\Core\Core.csproj" />
+    <ProjectReference Include="..\..\Libs\Infrastructure.EFCore\Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\..\Libs\Infrastructure.Main\Infrastructure.Main.csproj" />
+    <ProjectReference Include="..\OAuth2Service\Infrastructure.OAuth2\Infrastructure.OAuth2.csproj" />
   </ItemGroup>
 
 </Project>

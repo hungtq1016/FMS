@@ -24,6 +24,10 @@ namespace Infrastructure.OAuth2.Configurations
                 .HasDefaultValueSql(Constants.DateTimeAlgorithm)
                 .IsRequired(true);
 
+            builder.Property(group => group.Enable)
+                .HasDefaultValue(true)
+                .IsRequired(true);
+
             builder.Property(group => group.UserId).HasColumnType("varchar")
                 .HasMaxLength(36)
                 .HasDefaultValueSql(Constants.UuidAlgorithm)
