@@ -1,5 +1,7 @@
-﻿using Infrastructure.OAuth2.DTOs;
+﻿using Infrastructure.EFCore.Service;
+using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,8 +12,8 @@ namespace Infrastructure.OAuth2.Data.Services;
 
 public interface ITokenService
 {
-    TokenResponse GetTokenResponse(User user);
-    string GetAccessToken(User user);
+    Task<TokenResponse> GetTokenResponseAsync(User user);
+    Task<string> GetAccessToken(User user);
     Task<string> GetRefreshToken(User user);
 
 }
@@ -19,24 +21,25 @@ public interface ITokenService
 public class TokenService : ITokenService
 {
     private IConfiguration _config;
-
-    public TokenService(IConfiguration config)
+    private readonly OAuth2Context _context;
+    public TokenService(IConfiguration config, OAuth2Context context)
     {
         _config = config;
+        _context = context;
     }
 
-    public TokenResponse GetTokenResponse(User user)
+    public async Task<TokenResponse> GetTokenResponseAsync(User user)
     {
         return new TokenResponse
         {
-            AccessToken = GetAccessToken(user),
+            AccessToken = await GetAccessToken(user),
             ExpiredTime = DateTime.Now.AddMinutes(ExpiredTime()),
             RefreshToken = Guid.NewGuid().ToString(),
             TokenType = "Beared"
         };
     }
 
-    public string GetAccessToken(User user)
+    public async Task<string> GetAccessToken(User user)
     {
         List<Claim> claims = new List<Claim>
         {
@@ -45,7 +48,16 @@ public class TokenService : ITokenService
             new Claim(JwtRegisteredClaimNames.Sub, user.FullName),
         };
 
+        var permissions = await LoadPermissionsFromDb(user.Id);
+
+        foreach (var permission in permissions)
+        {
+            claims.Add(new Claim(permission.Type, permission.Value)); // Assuming 'Name' is a property of 'Permission'
+        }
+
+        // Generate the access token with the claims
         return AccessTokenGenerator(claims);
+
     }
 
     public Task<string> GetRefreshToken(User user)
@@ -68,6 +80,16 @@ public class TokenService : ITokenService
             );
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+    private async Task<List<Permission>> LoadPermissionsFromDb(Guid userId)
+    {
+        return await _context.Users
+            .Where(u => u.Id == userId)
+            .SelectMany(u => u.Groups)
+            .SelectMany(g => g.Role.Assignments)
+            .Select(a => a.Permission)
+            .Distinct()
+            .ToListAsync();
     }
 
     private int ExpiredTime() => int.TryParse(_config["JWT:AccessTokenValidityInMinutes"], out int accessTokenValidityInMinutes) ? accessTokenValidityInMinutes : 0;

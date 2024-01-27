@@ -17,7 +17,6 @@ namespace Infrastructure.EFCore.Extensions
                     services.AddScoped(type); // Register the IRepository<>
                 }
             }
-
             return services;
         }
     }
