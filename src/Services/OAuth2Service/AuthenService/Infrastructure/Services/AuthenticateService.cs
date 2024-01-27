@@ -33,7 +33,7 @@ namespace AuthenService.Infrastructure
                                 user => user.Email == request.Email
                             });
 
-            if (user is null || !BC.Verify(user.Password, request.Password))
+            if (user is null || !BC.Verify(request.Password, user.Password))
             {
                 return new Response<TokenResponse>
                 {
@@ -46,7 +46,7 @@ namespace AuthenService.Infrastructure
 
             return new Response<TokenResponse>
             {
-                Data = _tokenService.GetTokenResponse(user),
+                Data = await _tokenService.GetTokenResponseAsync(user),
                 IsError = false,
                 Message = "Login successfully!",
                 StatusCode = 200
