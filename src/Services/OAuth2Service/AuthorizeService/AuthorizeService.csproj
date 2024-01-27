@@ -24,8 +24,4 @@
     <ProjectReference Include="..\Infrastructure.OAuth2\Infrastructure.OAuth2.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
 </Project>

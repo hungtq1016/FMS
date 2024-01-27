@@ -2,6 +2,7 @@ using Infrastructure.EFCore.Extensions;
 using Infrastructure.EFCore.Repository;
 using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.Data;
+using Infrastructure.OAuth2.Features;
 using Infrastructure.OAuth2.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,9 +19,10 @@ builder.Services.AddMemoryCache();
 
 builder.Services.AddJWT(configuration);
 builder.Services.AddSqlServerDbContext<OAuth2Context>(configuration.GetConnectionString("userDB"));
+builder.Services.AddCustomMapper<OAuth2Profile>();
 
 builder.Services.AddScoped<IRepository<Role>, OAuth2Repository<Role>>();
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
+builder.Services.AddScoped(typeof(IService<,,>), typeof(Service<,,>));
 
 var app = builder.Build();
 
