@@ -10,6 +10,8 @@ namespace Infrastructure.EFCore.Repository
         Task<List<TEntity>> FindAllAsync(CancellationToken cancellationToken = default);
         Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
         Task<TEntity> EditAsync(TEntity entity, CancellationToken cancellationToken = default);
+        Task<List<TEntity>> BulkEditAsync(List<TEntity> entities, CancellationToken cancellationToken = default);
         ValueTask DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
+        ValueTask BulkDeleteAsync(List<TEntity> entities, CancellationToken cancellationToken = default);
     }
 }

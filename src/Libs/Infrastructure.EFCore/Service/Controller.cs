@@ -25,13 +25,6 @@ namespace Infrastructure.EFCore.Service
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpDelete("{id:Guid}")]
-        public virtual async Task<IActionResult> Delete(Guid id)
-        {
-            var result = await _service.DeleteAsync(id);
-            return StatusCode(result.StatusCode, result);
-        }
-
         [HttpPost]
         public virtual async Task<IActionResult> Post([FromBody] TRequest request)
         {
@@ -42,7 +35,28 @@ namespace Infrastructure.EFCore.Service
         [HttpPut("{id:Guid}")]
         public virtual async Task<IActionResult> Put(Guid id, [FromBody] TRequest request)
         {
-            var result = await _service.EditAsync(id,request);
+            var result = await _service.EditAsync(id, request);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpPut]
+        public virtual async Task<IActionResult> BulkPut([FromBody] List<TEntity> request)
+        {
+            var result = await _service.BulkEditAsync(request);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpDelete("{id:Guid}")]
+        public virtual async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _service.DeleteAsync(id);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpDelete]
+        public virtual async Task<IActionResult> BulkDelete([FromBody] List<TEntity> request)
+        {
+            var result = await _service.BulkDeleteAsync(request);
             return StatusCode(result.StatusCode, result);
         }
     }

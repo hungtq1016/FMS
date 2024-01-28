@@ -4,10 +4,12 @@ using Infrastructure.EFCore.Repository;
 using System.Linq.Expressions;
 using Infrastructure.EFCore.Helpers;
 using AutoMapper;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace Infrastructure.EFCore.Service
 {
-    public class Service<TEntity,TRequest,TResponse> : IService<TEntity,TRequest,TResponse> where TEntity : Entity
+    public class Service<TEntity,TRequest,TResponse> : IService<TEntity,TRequest,TResponse> where TEntity : Entity 
     {
         private readonly IRepository<TEntity> _repository;
         private readonly IMapper _mapper;
@@ -34,13 +36,36 @@ namespace Infrastructure.EFCore.Service
         public async Task<Response<TResponse>> FindByIdAsync(Guid id)
         {
             TEntity record = await _repository.FindByIdAsync(id);
+            PrintProperties(record);
 
             if (record is null)
                 return ResponseHelper.CreateNotFoundResponse<TResponse>(null);
 
-            TResponse response = _mapper.Map<TResponse>(record);
+            var response = _mapper.Map<TResponse>(record);
+
+            PrintProperties(response);
 
             return ResponseHelper.CreateSuccessResponse(response);
+        }
+
+        public static void PrintProperties(object obj)
+        {
+            if (obj == null) return;
+
+            // Get the type of the object
+            Type type = obj.GetType();
+
+            // Get all public properties of the object
+            PropertyInfo[] properties = type.GetProperties();
+
+            foreach (PropertyInfo property in properties)
+            {
+                // Get the value of the property
+                object value = property.GetValue(obj, null);
+
+                // Print the name and value of the property
+                Console.WriteLine($"{property.Name}: {value}");
+            }
         }
 
         public async Task<Response<TResponse>> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions)
@@ -82,16 +107,32 @@ namespace Infrastructure.EFCore.Service
         {
             TEntity record = await _repository.FindByIdAsync(id);
 
-            _mapper.Map(request, record);
-
             if (record is null)
                 return ResponseHelper.CreateNotFoundResponse<TResponse>(null);
+
+            _mapper.Map(request, record);
 
             await _repository.EditAsync(record);
 
             TResponse response = _mapper.Map<TResponse>(record);
 
             return ResponseHelper.CreateSuccessResponse(response);
+        }
+
+        public async Task<Response<TResponse>> BulkEditAsync(List<TEntity> request)
+        {
+            List<TEntity> records = await _repository.BulkEditAsync(request);
+
+            TResponse response = _mapper.Map<TResponse>(records);
+
+            return ResponseHelper.CreateSuccessResponse(response);
+        }
+
+        public async Task<Response<bool>> BulkDeleteAsync(List<TEntity> request)
+        {
+            await _repository.BulkDeleteAsync(request);
+
+            return ResponseHelper.CreateSuccessResponse(true);
         }
     }
 }

@@ -24,13 +24,12 @@ namespace Infrastructure.EFCore.Repository
 
         public async Task<TEntity> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _entity.SingleOrDefaultAsync(e => e.Id == id, cancellationToken: cancellationToken);
+            return await _entity.FindAsync(id);
         }
 
         public async Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions, CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> query = _entity;
-
             foreach (var condition in conditions)
             {
                 query = query.Where(condition);
@@ -50,7 +49,7 @@ namespace Infrastructure.EFCore.Repository
 
         public async ValueTask DeleteAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            await _entity.AddAsync(entity, cancellationToken);
+            _entity.Remove(entity);
 
             await _context.SaveChangesAsync(cancellationToken);
         }
@@ -64,6 +63,25 @@ namespace Infrastructure.EFCore.Repository
             await _context.SaveChangesAsync(cancellationToken);
 
             return await Task.FromResult(entry.Entity);
+        }
+
+        public async Task<List<TEntity>> BulkEditAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            foreach (var entity in entities)
+            {
+                var ent = _entity.Where(e => e.Id == entity.Id).FirstOrDefault();
+                var entry = _context.Entry(entity);
+                entry.State = EntityState.Modified;
+            }
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return entities;
+        }
+
+        public async ValueTask BulkDeleteAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            _entity.RemoveRange(entities);
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }
