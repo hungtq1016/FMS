@@ -12,13 +12,13 @@ namespace Core
 
     public abstract class Entity: IEntity
     {
-        public Guid Id { get; }  = Guid.NewGuid();
+        public Guid Id { get; } 
 
         public bool Enable { get; } = true;
 
-        public DateTime CreatedAt { get; } = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc);
+        public DateTime CreatedAt { get; }
 
-        public DateTime UpdatedAt { get; internal set; }
+        public DateTime UpdatedAt { get; }
     }
 
     public abstract class AbstractFile : Entity
