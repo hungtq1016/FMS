@@ -8,17 +8,11 @@ namespace AuthorizeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : AbstactController<User,UserRequest,UserResponse>
+    public class UsersController : ResourceController<User,UserRequest,UserResponse>
     {
         public UsersController(IService<User, UserRequest, UserResponse> service) : base(service)
         {
             
-        }
-
-        [Permission("permission","user.add")]
-        public override async Task<IActionResult> Post(UserRequest request)
-        {
-            return await base.Post(request);
         }
     }
 }
