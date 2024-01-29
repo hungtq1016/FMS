@@ -1,4 +1,5 @@
-﻿using Infrastructure.EFCore.Service;
+﻿using AuthorizeService.Infrastructure.Services;
+using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +10,18 @@ namespace AuthorizeService.Controllers
     [ApiController]
     public class RolesController : ResourceController<Role,RoleRequest,RoleResponse>
     {
-        public RolesController(IService<Role,RoleRequest,RoleResponse> service) : base(service)
+        private readonly IRoleService _roleService;
+
+        public RolesController(IRoleService roleService) : base(roleService)
         {
+            _roleService = roleService;
+        }
+
+        [HttpGet("ByUserId/{userId:Guid}")]
+        public async Task<IActionResult> GetRolesByUserId(Guid userId)
+        {
+            var response = await _roleService.FindAllRolesByUserId(userId);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

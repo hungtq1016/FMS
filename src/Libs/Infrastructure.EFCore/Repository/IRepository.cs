@@ -7,6 +7,7 @@ namespace Infrastructure.EFCore.Repository
     {
         Task<TEntity> FindByIdAsync(Guid id, CancellationToken cancellationToken = default);
         Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions, CancellationToken cancellationToken = default);
+        Task<List<TEntity>> FindAllByConditionAsync(Expression<Func<TEntity, bool>>[] conditions, params string[] properties);
         Task<List<TEntity>> FindAllAsync(CancellationToken cancellationToken = default);
         Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
         Task<TEntity> EditAsync(TEntity entity, CancellationToken cancellationToken = default);

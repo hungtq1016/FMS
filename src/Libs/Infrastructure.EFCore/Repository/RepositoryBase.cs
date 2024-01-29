@@ -38,6 +38,25 @@ namespace Infrastructure.EFCore.Repository
             return await query.FirstOrDefaultAsync(cancellationToken);
         }
 
+        public async Task<List<TEntity>> FindAllByConditionAsync(Expression<Func<TEntity, bool>>[] conditions, params string[] properties)
+        {
+            IQueryable<TEntity> query = _entity;
+            if (conditions != null)
+            {
+                foreach (var condition in conditions)
+                {
+                    query = query.Where(condition);
+                }
+            }
+
+            foreach (var include in properties)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.ToListAsync();
+        }
+
         public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
             await _entity.AddAsync(entity, cancellationToken);
