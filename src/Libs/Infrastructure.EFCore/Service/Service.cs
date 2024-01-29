@@ -4,7 +4,6 @@ using Infrastructure.EFCore.Repository;
 using System.Linq.Expressions;
 using Infrastructure.EFCore.Helpers;
 using AutoMapper;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace Infrastructure.EFCore.Service
@@ -36,36 +35,13 @@ namespace Infrastructure.EFCore.Service
         public async Task<Response<TResponse>> FindByIdAsync(Guid id)
         {
             TEntity record = await _repository.FindByIdAsync(id);
-            PrintProperties(record);
 
             if (record is null)
                 return ResponseHelper.CreateNotFoundResponse<TResponse>(null);
 
             var response = _mapper.Map<TResponse>(record);
 
-            PrintProperties(response);
-
             return ResponseHelper.CreateSuccessResponse(response);
-        }
-
-        public static void PrintProperties(object obj)
-        {
-            if (obj == null) return;
-
-            // Get the type of the object
-            Type type = obj.GetType();
-
-            // Get all public properties of the object
-            PropertyInfo[] properties = type.GetProperties();
-
-            foreach (PropertyInfo property in properties)
-            {
-                // Get the value of the property
-                object value = property.GetValue(obj, null);
-
-                // Print the name and value of the property
-                Console.WriteLine($"{property.Name}: {value}");
-            }
         }
 
         public async Task<Response<TResponse>> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions)
