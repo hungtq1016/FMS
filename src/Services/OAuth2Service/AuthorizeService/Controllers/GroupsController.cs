@@ -1,15 +1,16 @@
 ﻿using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PermissionsController : ResourceController<Permission, PermissionRequest, PermissionResponse>
+    public class GroupsController : SingletonController<Group, GroupRequest, GroupResponse>
     {
-        public PermissionsController(IService<Permission, PermissionRequest,PermissionResponse> service) : base(service)
+        public GroupsController(IService<Group, GroupRequest, GroupResponse> service) : base(service)
         {
         }
     }
