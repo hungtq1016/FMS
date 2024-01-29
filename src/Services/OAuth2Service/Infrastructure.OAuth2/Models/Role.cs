@@ -1,4 +1,5 @@
 ﻿using Core;
+using System.Text.Json.Serialization;
 
 namespace Infrastructure.OAuth2.Models
 {
@@ -8,6 +9,7 @@ namespace Infrastructure.OAuth2.Models
         public string Note { get; set; }
 
         public ICollection<Assignment> Assignments { get; set; }
+        [JsonIgnore]
         public ICollection<Group> Groups { get; set; }
     }
 }
