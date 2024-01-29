@@ -1,18 +1,17 @@
 ﻿using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.DTOs;
-using Infrastructure.OAuth2.Filters;
 using Infrastructure.OAuth2.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizeService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ResourceController<User,UserRequest,UserResponse>
+    public class GroupsController : SingletonController<Group, GroupRequest, GroupResponse>
     {
-        public UsersController(IService<User, UserRequest, UserResponse> service) : base(service)
+        public GroupsController(IService<Group, GroupRequest, GroupResponse> service) : base(service)
         {
-            
         }
     }
 }

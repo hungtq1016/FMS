@@ -32,6 +32,10 @@ namespace Infrastructure.OAuth2.Configurations
                 .HasMaxLength(36)
                 .IsRequired(false);
 
+            builder.Property(user => user.Password)
+                .HasDefaultValue(BCrypt.Net.BCrypt.HashPassword("Th1s1sP@ssword"))
+                .IsRequired(false);
+
             builder.HasMany(user => user.Groups)
                 .WithOne(group => group.User)
                 .HasForeignKey(group => group.UserId)

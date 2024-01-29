@@ -22,6 +22,8 @@ builder.Services.AddSqlServerDbContext<OAuth2Context>(configuration.GetConnectio
 builder.Services.AddCustomMapper<OAuth2Profile>();
 
 builder.Services.AddScoped<IRepository<Role>, OAuth2Repository<Role>>();
+builder.Services.AddScoped<IRepository<Permission>, OAuth2Repository<Permission>>();
+builder.Services.AddScoped<IRepository<Group>, OAuth2Repository<Group>>();
 builder.Services.AddScoped(typeof(IService<,,>), typeof(Service<,,>));
 
 var app = builder.Build();

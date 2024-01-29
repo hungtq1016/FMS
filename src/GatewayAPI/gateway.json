@@ -36,7 +36,7 @@
         }
       ],
       "UpstreamPathTemplate": "/roles",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put","Delete" ],
       "SwaggerKey": "role"
     },
     {
@@ -62,7 +62,7 @@
         }
       ],
       "UpstreamPathTemplate": "/users",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put","Delete" ],
       "SwaggerKey": "user"
     },
     {

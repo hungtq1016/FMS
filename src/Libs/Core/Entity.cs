@@ -4,21 +4,21 @@ namespace Core
 {
     public interface IEntity
     {
-        public Guid Id { get; }
-        public bool Enable { get; }
-        public DateTime CreatedAt { get; }
-        public DateTime UpdatedAt { get; }
+        public Guid Id { get; set; }
+        public bool Enable { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 
     public abstract class Entity: IEntity
     {
-        public Guid Id { get; }  = Guid.NewGuid();
+        public Guid Id { get; set; } 
 
-        public bool Enable { get; } = true;
+        public bool Enable { get; set; } = true;
 
-        public DateTime CreatedAt { get; } = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc);
+        public DateTime CreatedAt { get; set; } = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc);
 
-        public DateTime UpdatedAt { get; internal set; }
+        public DateTime UpdatedAt { get; set; } = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc);
     }
 
     public abstract class AbstractFile : Entity

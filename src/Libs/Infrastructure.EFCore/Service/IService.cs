@@ -11,6 +11,8 @@ namespace Infrastructure.EFCore.Service
         Task<Response<TResponse>> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions);
         Task<Response<TResponse>> AddAsync(TRequest request);
         Task<Response<TResponse>> EditAsync(Guid id, TRequest request);
+        Task<Response<TResponse>> BulkEditAsync(List<TEntity> request);
         Task<Response<bool>> DeleteAsync(Guid id);
+        Task<Response<bool>> BulkDeleteAsync(List<TEntity> request);
     }
 }

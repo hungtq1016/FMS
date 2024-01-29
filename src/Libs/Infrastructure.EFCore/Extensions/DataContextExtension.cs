@@ -1,4 +1,5 @@
 ﻿using Core;
+using Infrastructure.EFCore.Service;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +19,7 @@ namespace Infrastructure.EFCore.Extensions
                     sqlOptions.MigrationsAssembly(typeof(TDbContext).Assembly.GetName().Name);
                 });
             });
-
+            services.AddScoped(typeof(IService<,,>), typeof(Service<,,>));
             return services;
         }
     }
