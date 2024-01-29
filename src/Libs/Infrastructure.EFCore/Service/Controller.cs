@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.EFCore.Service
 {
-    public abstract class AbstactController<TEntity,TRequest,TResponse> : ControllerBase where TEntity : Entity
+    public abstract class SingletonController<TEntity, TRequest, TResponse> : ControllerBase where TEntity : Entity
     {
-        private readonly IService<TEntity,TRequest,TResponse> _service;
-        public AbstactController(IService<TEntity,TRequest,TResponse> service)
+        private readonly IService<TEntity, TRequest, TResponse> _service;
+        public SingletonController(IService<TEntity, TRequest, TResponse> service)
         {
             _service = service;
         }
@@ -32,6 +32,21 @@ namespace Infrastructure.EFCore.Service
             return StatusCode(result.StatusCode, result);
         }
 
+        [HttpDelete("{id:Guid}")]
+        public virtual async Task<IActionResult> Delete(Guid id)
+        {
+            var result = await _service.DeleteAsync(id);
+            return StatusCode(result.StatusCode, result);
+        }
+    }
+    public abstract class ResourceController<TEntity, TRequest, TResponse> : SingletonController<TEntity, TRequest, TResponse> where TEntity : Entity
+    {
+        private readonly IService<TEntity, TRequest, TResponse> _service;
+        protected ResourceController(IService<TEntity, TRequest, TResponse> service) : base(service)
+        {
+            
+        }
+
         [HttpPut("{id:Guid}")]
         public virtual async Task<IActionResult> Put(Guid id, [FromBody] TRequest request)
         {
@@ -43,13 +58,6 @@ namespace Infrastructure.EFCore.Service
         public virtual async Task<IActionResult> BulkPut([FromBody] List<TEntity> request)
         {
             var result = await _service.BulkEditAsync(request);
-            return StatusCode(result.StatusCode, result);
-        }
-
-        [HttpDelete("{id:Guid}")]
-        public virtual async Task<IActionResult> Delete(Guid id)
-        {
-            var result = await _service.DeleteAsync(id);
             return StatusCode(result.StatusCode, result);
         }
 
