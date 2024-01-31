@@ -3,7 +3,8 @@ using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.Models;
 using Infrastructure.EFCore.Extensions;
 using UserService.Infrastructure.Data;
-using AuthorizeService.Features;
+using UserService.Infrastructure;
+using UserService.Infrastructure.Features;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -36,5 +37,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllers();
+app.ConfigureExceptionHandler();
 
 app.Run();

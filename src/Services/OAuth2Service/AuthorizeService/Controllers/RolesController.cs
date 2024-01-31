@@ -1,5 +1,5 @@
 ﻿using AuthorizeService.Infrastructure.Services;
-using Infrastructure.EFCore.Service;
+using Infrastructure.EFCore.Controllers;
 using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace AuthorizeService.Controllers
         public async Task<IActionResult> GetRolesByUserId(Guid userId)
         {
             var response = await _roleService.FindAllRolesByUserId(userId);
-            return StatusCode(response.StatusCode, response);
+            return StatusCode(response.StatusCode, response.Data);
         }
     }
 }
