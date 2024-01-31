@@ -7,4 +7,10 @@
         public int StatusCode { get; set; }
         public bool IsError { get; set; }
     }
+
+    public class FileResponse
+    {
+        public Byte[] FilesBytes { get; set; }
+        public string Extension { get; set; }
+    }
 }

@@ -15,12 +15,12 @@ namespace Infrastructure.EFCore.Helpers
             return new ResponseBuilder<TEntity>(data).With201().Build();
         }
 
-        public static Response<TEntity> CreateNotFoundResponse<TEntity>(string? message)
+        public static Response<TEntity> CreateNotFoundResponse<TEntity>(string message)
         {
             return new ResponseBuilder<TEntity>().With404(message).Build();
         }
 
-        public static Response<TEntity> CreateErrorResponse<TEntity>(string? message)
+        public static Response<TEntity> CreateErrorResponse<TEntity>(string message)
         {
             return new ResponseBuilder<TEntity>().With500(message).Build();
         }
