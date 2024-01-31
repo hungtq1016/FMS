@@ -1,4 +1,5 @@
-﻿using Infrastructure.EFCore.DTOs;
+﻿using Core;
+using Infrastructure.EFCore.DTOs;
 using System.Net;
 
 namespace Infrastructure.EFCore.Builders
@@ -47,12 +48,13 @@ namespace Infrastructure.EFCore.Builders
             response.Message = message;
             response.StatusCode = (int)HttpStatusCode.NotFound;
             response.IsError = true;
+            response.Data = default;
             return this;
         }
 
         public ResponseBuilder<TEntity> With201()
         {
-            response.Message = "Created!";
+            response.Message = ((StatusMessageEnum)HttpStatusCode.Created).ToString();
             response.StatusCode = (int)HttpStatusCode.Created;
             response.IsError = false;
             return this;
@@ -60,7 +62,7 @@ namespace Infrastructure.EFCore.Builders
 
         public ResponseBuilder<TEntity> With200()
         {
-            response.Message = "Successfully!";
+            response.Message = ((StatusMessageEnum)HttpStatusCode.OK).ToString();
             response.StatusCode = (int)HttpStatusCode.OK;
             response.IsError = false;
             return this;
