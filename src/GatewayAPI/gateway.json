@@ -36,7 +36,7 @@
         }
       ],
       "UpstreamPathTemplate": "/roles",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put","Delete" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "role"
     },
     {
@@ -62,7 +62,7 @@
         }
       ],
       "UpstreamPathTemplate": "/users",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put","Delete" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "SwaggerKey": "user"
     },
     {
@@ -77,8 +77,46 @@
       "UpstreamPathTemplate": "/users/{id}",
       "UpstreamHttpMethod": [ "Put", "Delete", "Get" ],
       "SwaggerKey": "user"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Roles/ByUserId/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5003
+        }
+      ],
+      "UpstreamPathTemplate": "/roles/user/{userId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "roles",
+      "SwaggerKey": "role"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Users/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5005
+        }
+      ],
+      "UpstreamPathTemplate": "/users/info/{userId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "user"
     }
   ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "user",
+        "roles"
+      ],
+      "UpstreamPathTemplate": "/user-detail/{userId}",
+      "SwaggerKey": "user"
+    }
+  ],
+
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:5000"
   },

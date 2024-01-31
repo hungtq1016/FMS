@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Libs\Infrastructure.EFCore\Infrastructure.EFCore.csproj" />
+    <ProjectReference Include="..\Services\OAuth2Service\Infrastructure.OAuth2\Infrastructure.OAuth2.csproj" />
   </ItemGroup>
 
 </Project>
