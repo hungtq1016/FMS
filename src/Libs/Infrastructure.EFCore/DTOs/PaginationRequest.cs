@@ -6,13 +6,13 @@ namespace Infrastructure.EFCore.DTOs
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public StatusEnum Status { get; set; }
+        public StatusMessageEnum Status { get; set; }
 
         public PaginationRequest()
         {
             PageNumber = 1;
             PageSize = 10;
-            Status = StatusEnum.All;
+            Status = StatusMessageEnum.All;
         }
 
         public PaginationRequest(int pageNumber, int pageSize)

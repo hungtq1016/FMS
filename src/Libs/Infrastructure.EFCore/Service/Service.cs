@@ -95,18 +95,22 @@ namespace Infrastructure.EFCore.Service
             return ResponseHelper.CreateSuccessResponse(response);
         }
 
-        public async Task<Response<TResponse>> BulkEditAsync(List<TEntity> request)
+        public async Task<Response<TResponse>> BulkEditAsync(List<TEntity> requests)
         {
-            List<TEntity> records = await _repository.BulkEditAsync(request);
+            var entities  = _mapper.Map<List<TEntity>>(requests);
+            await Console.Out.WriteLineAsync(requests.ToString());
+            List<TEntity> records = await _repository.BulkEditAsync(entities);
 
             TResponse response = _mapper.Map<TResponse>(records);
 
             return ResponseHelper.CreateSuccessResponse(response);
         }
 
-        public async Task<Response<bool>> BulkDeleteAsync(List<TEntity> request)
+        public async Task<Response<bool>> BulkDeleteAsync(List<TEntity> requests)
         {
-            await _repository.BulkDeleteAsync(request);
+            var entities = _mapper.Map<List<TEntity>>(requests);
+
+            await _repository.BulkDeleteAsync(entities);
 
             return ResponseHelper.CreateSuccessResponse(true);
         }

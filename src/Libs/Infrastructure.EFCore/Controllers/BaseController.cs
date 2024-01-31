@@ -1,7 +1,8 @@
 ﻿using Core;
+using Infrastructure.EFCore.Service;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Infrastructure.EFCore.Service
+namespace Infrastructure.EFCore.Controllers
 {
     public abstract class SingletonController<TEntity, TRequest, TResponse> : ControllerBase where TEntity : Entity
     {
@@ -44,7 +45,7 @@ namespace Infrastructure.EFCore.Service
         private readonly IService<TEntity, TRequest, TResponse> _service;
         protected ResourceController(IService<TEntity, TRequest, TResponse> service) : base(service)
         {
-            
+            _service = service;
         }
 
         [HttpPut("{id:Guid}")]
@@ -55,9 +56,9 @@ namespace Infrastructure.EFCore.Service
         }
 
         [HttpPut]
-        public virtual async Task<IActionResult> BulkPut([FromBody] List<TEntity> request)
+        public virtual async Task<IActionResult> BulkPut([FromBody] List<TEntity> requests)
         {
-            var result = await _service.BulkEditAsync(request);
+            var result = await _service.BulkEditAsync(requests);
             return StatusCode(result.StatusCode, result);
         }
 

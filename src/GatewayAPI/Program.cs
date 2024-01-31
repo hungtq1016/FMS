@@ -1,3 +1,4 @@
+using Infrastructure.EFCore.Extensions;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
@@ -28,5 +29,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseOcelot().Wait();
+app.ConfigureExceptionHandler();
 
 app.Run();

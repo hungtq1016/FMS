@@ -21,7 +21,7 @@ namespace Core
         public DateTime UpdatedAt { get; set; } = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc);
     }
 
-    public abstract class AbstractFile : Entity
+    public class AbstractFile : Entity
     {
         public string Title { get; set; }
 

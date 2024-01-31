@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Main.Enums
 {
-    public enum StatusEnum
+    public enum StatusMessageEnum
     {
         All = 2,
         Enalble = 1,

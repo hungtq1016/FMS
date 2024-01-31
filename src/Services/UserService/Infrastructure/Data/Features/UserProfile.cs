@@ -2,7 +2,7 @@
 using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Models;
 
-namespace AuthorizeService.Features
+namespace UserService.Infrastructure.Features
 {
     public class UserProfile : Profile
     {

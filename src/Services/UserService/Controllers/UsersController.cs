@@ -1,4 +1,5 @@
-﻿using Infrastructure.EFCore.Service;
+﻿using Infrastructure.EFCore.Controllers;
+using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.DTOs;
 using Infrastructure.OAuth2.Filters;
 using Infrastructure.OAuth2.Models;

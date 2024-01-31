@@ -1,5 +1,6 @@
 ﻿using Core;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System.Linq.Expressions;
 
 namespace Infrastructure.EFCore.Repository
@@ -10,21 +11,37 @@ namespace Infrastructure.EFCore.Repository
     {
         protected readonly TDbContext _context;
         protected readonly DbSet<TEntity> _entity;
+        private readonly IMemoryCache _cache;
 
-        protected RepositoryBase(TDbContext context)
+        protected RepositoryBase(TDbContext context, IMemoryCache cache)
         {
             _context = context;
             _entity = context.Set<TEntity>();
+            _cache = cache;
         }
 
         public async Task<List<TEntity>> FindAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _entity.ToListAsync(cancellationToken: cancellationToken);
+            var entities = await _entity.ToListAsync(cancellationToken: cancellationToken);
+            return entities;
         }
 
         public async Task<TEntity> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
-            return await _entity.FindAsync(id);
+            var cacheKey = id;
+            if (!_cache.TryGetValue(cacheKey, out TEntity entity))
+            {
+                entity = await _entity.FindAsync(id);
+
+                if (entity != null)
+                {
+                    var cacheEntryOptions = new MemoryCacheEntryOptions()
+                        .SetSlidingExpiration(TimeSpan.FromMinutes(5));
+
+                    _cache.Set(cacheKey, entity, cacheEntryOptions);
+                }
+            }
+            return entity;
         }
 
         public async Task<TEntity> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions, CancellationToken cancellationToken = default)
