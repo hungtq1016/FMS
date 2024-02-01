@@ -24,18 +24,42 @@ namespace FlightService.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("FlightService.Models.Airport", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<bool>("Enable")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
 
@@ -44,22 +68,73 @@ namespace FlightService.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("FlightService.Models.Flight", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)")
+                        .HasDefaultValueSql("NEWID()");
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<DateTime>("DepartureDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Enable")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<string>("LoadingId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
+
+                    b.Property<string>("Route")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UnloadingId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LoadingId");
+
+                    b.HasIndex("UnloadingId");
+
                     b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("FlightService.Models.Flight", b =>
+                {
+                    b.HasOne("FlightService.Models.Airport", "Loading")
+                        .WithMany("LoadingFlights")
+                        .HasForeignKey("LoadingId")
+                        .IsRequired();
+
+                    b.HasOne("FlightService.Models.Airport", "Unloading")
+                        .WithMany("UnloadingFlights")
+                        .HasForeignKey("UnloadingId")
+                        .IsRequired();
+
+                    b.Navigation("Loading");
+
+                    b.Navigation("Unloading");
+                });
+
+            modelBuilder.Entity("FlightService.Models.Airport", b =>
+                {
+                    b.Navigation("LoadingFlights");
+
+                    b.Navigation("UnloadingFlights");
                 });
 #pragma warning restore 612, 618
         }

@@ -73,6 +73,17 @@ namespace Infrastructure.EFCore.Repository
 
             return await query.ToListAsync();
         }
+        public async Task<List<TEntity>> FindAllAsync( params string[] properties)
+        {
+            IQueryable<TEntity> query = _entity;
+
+            foreach (var include in properties)
+            {
+                query = query.Include(include);
+            }
+
+            return await query.ToListAsync();
+        }
 
         public async Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {

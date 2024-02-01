@@ -1,5 +1,4 @@
-﻿using Infrastructure.EFCore.Service;
-using Infrastructure.OAuth2.DTOs;
+﻿using Infrastructure.OAuth2.Models.DTOs;
 using Infrastructure.OAuth2.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

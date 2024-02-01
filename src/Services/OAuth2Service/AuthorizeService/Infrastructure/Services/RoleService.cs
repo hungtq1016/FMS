@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using Infrastructure.EFCore.DTOs;
 using Infrastructure.EFCore.Helpers;
 using Infrastructure.EFCore.Repository;
 using Infrastructure.EFCore.Service;
-using Infrastructure.OAuth2.DTOs;
+using Infrastructure.OAuth2.Models.DTOs;
 using Infrastructure.OAuth2.Models;
 using System.Data;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace AuthorizeService.Infrastructure.Services
 {

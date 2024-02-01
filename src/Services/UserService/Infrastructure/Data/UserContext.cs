@@ -1,5 +1,5 @@
 ﻿using Infrastructure.EFCore.Data;
-using Infrastructure.OAuth2.Configurations;
+using Infrastructure.OAuth2.Data.Configurations;
 using Infrastructure.OAuth2.Models;
 using Microsoft.EntityFrameworkCore;
 

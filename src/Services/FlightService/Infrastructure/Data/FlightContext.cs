@@ -1,4 +1,5 @@
-﻿using FlightService.Models;
+﻿using FlightService.Infrastructure.Configurations;
+using FlightService.Models;
 using Infrastructure.EFCore.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,9 @@ namespace FlightService.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new FlightConfiguration());
+            modelBuilder.ApplyConfiguration(new AirportConfiguration());
         }
     }
 }

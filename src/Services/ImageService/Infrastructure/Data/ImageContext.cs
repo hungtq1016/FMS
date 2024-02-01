@@ -1,4 +1,5 @@
-﻿using ImageService.Models;
+﻿using ImageService.Infrastructure.Configurations;
+using ImageService.Models;
 using Infrastructure.EFCore.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ namespace ImageService.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration( new ImageConfiguration());
         }
     }
 }

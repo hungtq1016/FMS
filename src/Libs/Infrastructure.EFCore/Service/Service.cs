@@ -4,11 +4,10 @@ using Infrastructure.EFCore.Repository;
 using System.Linq.Expressions;
 using Infrastructure.EFCore.Helpers;
 using AutoMapper;
-using System.Reflection;
 
 namespace Infrastructure.EFCore.Service
 {
-    public class Service<TEntity,TRequest,TResponse> : IService<TEntity,TRequest,TResponse> where TEntity : Entity 
+    public class Service<TEntity,TRequest,TResponse> : IService<TEntity,TRequest,TResponse> where TEntity : Entity where TRequest : EntityRequest
     {
         private readonly IRepository<TEntity> _repository;
         private readonly IMapper _mapper;
@@ -21,6 +20,20 @@ namespace Infrastructure.EFCore.Service
         public async Task<Response<List<TResponse>>> FindAllAsync()
         {
             List<TEntity> records = await _repository.FindAllAsync();
+
+            if (records is null)
+                return ResponseHelper.CreateNotFoundResponse<List<TResponse>>(null);
+
+            records = records.Where(record => record.Enable).ToList();
+
+            List<TResponse> response = _mapper.Map<List<TResponse>>(records);
+
+            return ResponseHelper.CreateSuccessResponse(response);
+        }
+
+        public async Task<Response<List<TResponse>>> FindAllAsync(params string[] properties)
+        {
+            List<TEntity> records = await _repository.FindAllAsync(properties);
 
             if (records is null)
                 return ResponseHelper.CreateNotFoundResponse<List<TResponse>>(null);

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Infrastructure.OAuth2.DTOs;
+using Infrastructure.OAuth2.Models.DTOs;
 using Infrastructure.OAuth2.Models;
 
 namespace Infrastructure.OAuth2.Features
@@ -19,6 +19,9 @@ namespace Infrastructure.OAuth2.Features
 
             CreateMap<GroupRequest, Group>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
             CreateMap<Group, GroupResponse>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            CreateMap<AssignmentRequest, Assignment>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<Assignment, AssignmentResponse>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }
