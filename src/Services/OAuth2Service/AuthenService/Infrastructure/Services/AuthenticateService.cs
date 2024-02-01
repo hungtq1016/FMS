@@ -3,7 +3,7 @@ using Infrastructure.EFCore.DTOs;
 using Infrastructure.EFCore.Helpers;
 using Infrastructure.EFCore.Repository;
 using Infrastructure.OAuth2.Data.Services;
-using Infrastructure.OAuth2.DTOs;
+using Infrastructure.OAuth2.Models.DTOs;
 using Infrastructure.OAuth2.Models;
 using System.Linq.Expressions;
 using BC = BCrypt.Net.BCrypt;

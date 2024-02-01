@@ -7,6 +7,7 @@ namespace Infrastructure.EFCore.Service
     public interface IService<TEntity,TRequest,TResponse>
     {
         Task<Response<List<TResponse>>> FindAllAsync();
+        Task<Response<List<TResponse>>> FindAllAsync(params string[] properties);
         Task<Response<TResponse>> FindByIdAsync(Guid id);
         Task<Response<TResponse>> FindOneAsync(Expression<Func<TEntity, bool>>[] conditions);
         Task<Response<TResponse>> AddAsync(TRequest request);

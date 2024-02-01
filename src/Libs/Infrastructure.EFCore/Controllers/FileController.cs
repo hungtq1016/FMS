@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.EFCore.Controllers
 {
-    public abstract class FileController<TEntity,TRequest,TResponse,TExtensionEnum> : ControllerBase where TEntity : AbstractFile where TExtensionEnum : Enum 
+    public abstract class FileController<TEntity,TRequest,TResponse,TExtensionEnum> : ControllerBase where TEntity : AbstractFile where TExtensionEnum : Enum  where TRequest : EntityRequest
     {
         private readonly IFileService<TEntity, TRequest, TResponse, TExtensionEnum> _service;
 

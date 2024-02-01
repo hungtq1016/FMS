@@ -2,7 +2,7 @@
 
 namespace ImageService.Models.DTOs
 {
-    public class ImageRequest 
+    public class ImageRequest : EntityRequest
     {
 
     }

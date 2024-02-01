@@ -1,6 +1,6 @@
 ﻿using AuthorizeService.Infrastructure.Services;
 using Infrastructure.EFCore.Controllers;
-using Infrastructure.OAuth2.DTOs;
+using Infrastructure.OAuth2.Models.DTOs;
 using Infrastructure.OAuth2.Models;
 using Microsoft.AspNetCore.Mvc;
 

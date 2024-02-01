@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.EFCore.Controllers
 {
-    public abstract class SingletonController<TEntity, TRequest, TResponse> : ControllerBase where TEntity : Entity
+    public abstract class SingletonController<TEntity, TRequest, TResponse> : ControllerBase where TEntity : Entity where TRequest : EntityRequest
     {
         private readonly IService<TEntity, TRequest, TResponse> _service;
         public SingletonController(IService<TEntity, TRequest, TResponse> service)
@@ -40,7 +40,7 @@ namespace Infrastructure.EFCore.Controllers
             return StatusCode(result.StatusCode, result);
         }
     }
-    public abstract class ResourceController<TEntity, TRequest, TResponse> : SingletonController<TEntity, TRequest, TResponse> where TEntity : Entity
+    public abstract class ResourceController<TEntity, TRequest, TResponse> : SingletonController<TEntity, TRequest, TResponse> where TEntity : Entity where TRequest : EntityRequest
     {
         private readonly IService<TEntity, TRequest, TResponse> _service;
         protected ResourceController(IService<TEntity, TRequest, TResponse> service) : base(service)

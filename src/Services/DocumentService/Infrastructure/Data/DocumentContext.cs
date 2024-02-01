@@ -1,4 +1,5 @@
-﻿using DocumentService.Models;
+﻿using DocumentService.Infrastructure.Configurations;
+using DocumentService.Models;
 using Infrastructure.EFCore.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ namespace DocumentService.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration( new DocumentConfiguration());
         }
     }
 }

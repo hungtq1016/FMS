@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Infrastructure.OAuth2.DTOs;
+using Infrastructure.OAuth2.Models.DTOs;
 using Infrastructure.OAuth2.Models;
 
 namespace UserService.Infrastructure.Features

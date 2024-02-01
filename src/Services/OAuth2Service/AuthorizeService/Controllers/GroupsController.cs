@@ -1,6 +1,6 @@
 ﻿using Infrastructure.EFCore.Controllers;
 using Infrastructure.EFCore.Service;
-using Infrastructure.OAuth2.DTOs;
+using Infrastructure.OAuth2.Models.DTOs;
 using Infrastructure.OAuth2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

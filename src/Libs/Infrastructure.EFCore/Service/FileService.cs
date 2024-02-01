@@ -11,6 +11,7 @@ namespace Infrastructure.EFCore.Service
         : IService<TEntity, TRequest, TResponse>
         where TEntity : AbstractFile
         where TExtensionEnum : Enum
+        where TRequest : EntityRequest
     {
         Task<Response<List<TResponse>>> AddAsync(List<IFormFile> files);
     }
@@ -18,6 +19,7 @@ namespace Infrastructure.EFCore.Service
         : Service<TEntity, TRequest, TResponse>, IFileService<TEntity, TRequest, TResponse, TExtensionEnum>
         where TEntity : AbstractFile
         where TExtensionEnum : Enum
+        where TRequest : EntityRequest
     {
         private readonly IRepository<TEntity> _repository;
         private readonly IMapper _mapper;

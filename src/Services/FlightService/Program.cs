@@ -22,6 +22,7 @@ builder.Services.AddSqlServerDbContext<FlightContext>(configuration.GetConnectio
 builder.Services.AddCustomMapper<FlightProfile>();
 
 builder.Services.AddScoped<IRepository<Flight>, FlightRepository<Flight>>();
+builder.Services.AddScoped<IRepository<Airport>, FlightRepository<Airport>>();
 builder.Services.AddScoped(typeof(IService<,,>), typeof(Service<,,>));
 
 var app = builder.Build();

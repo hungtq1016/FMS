@@ -1,6 +1,6 @@
 ﻿namespace FlightService.Models.DTOs
 {
-    public class FlightResponse
+    public class FlightResponse : Flight
     {
     }
 }

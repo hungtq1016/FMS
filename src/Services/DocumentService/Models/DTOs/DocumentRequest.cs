@@ -2,7 +2,7 @@
 
 namespace DocumentService.Models.DTOs
 {
-    public class DocumentRequest
+    public class DocumentRequest : EntityRequest
     {
         public string Title { get; set; }
 
