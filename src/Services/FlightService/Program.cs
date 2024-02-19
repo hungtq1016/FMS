@@ -5,6 +5,7 @@ using FlightService.Infrastructure.Data;
 using FlightService.Models;
 using FlightService.Infrastructure;
 using FlightService.Infrastructure.Features;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -33,7 +34,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
 
+var context = services.GetRequiredService<FlightContext>();
+
+if (context.Database.GetPendingMigrations().Any())
+{
+    context.Database.Migrate();
+}
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
