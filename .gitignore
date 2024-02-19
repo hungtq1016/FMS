@@ -362,4 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /src/Services/ImageService/Upload/Image/
-/src/Services/DocumentService/Upload/Document/638423104610450461.pdf
+/src/Services/DocumentService/Upload/Document/

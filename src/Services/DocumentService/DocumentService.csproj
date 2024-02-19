@@ -20,4 +20,8 @@
     <ProjectReference Include="..\..\Libs\Infrastructure.Main\Infrastructure.Main.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Upload\Document\" />
+  </ItemGroup>
+
 </Project>
