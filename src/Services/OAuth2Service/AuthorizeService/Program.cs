@@ -5,6 +5,7 @@ using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.Data;
 using Infrastructure.OAuth2.Features;
 using Infrastructure.OAuth2.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -37,6 +38,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
 
 app.ConfigureExceptionHandler();
 app.UseHttpsRedirection();

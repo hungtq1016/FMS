@@ -5,6 +5,8 @@ using Infrastructure.EFCore.Extensions;
 using UserService.Infrastructure.Data;
 using UserService.Infrastructure;
 using UserService.Infrastructure.Features;
+using Infrastructure.OAuth2.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -32,7 +34,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
 
+var context = services.GetRequiredService<UserContext>();
+
+if (context.Database.GetPendingMigrations().Any())
+{
+    context.Database.Migrate();
+}
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();

@@ -4,6 +4,7 @@ using DocumentService.Models;
 using ImageService.Infrastructure.Features;
 using Infrastructure.EFCore.Extensions;
 using Infrastructure.EFCore.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -31,7 +32,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
 
+var context = services.GetRequiredService<DocumentContext>();
+
+if (context.Database.GetPendingMigrations().Any())
+{
+    context.Database.Migrate();
+}
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();

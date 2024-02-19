@@ -4,6 +4,7 @@ using Infrastructure.EFCore.Repository;
 using Infrastructure.OAuth2.Data;
 using Infrastructure.OAuth2.Data.Services;
 using Infrastructure.OAuth2.Models;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
