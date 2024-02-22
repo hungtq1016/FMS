@@ -1,4 +1,8 @@
 ﻿using Core;
+using Infrastructure.EFCore.DTOs;
+using Infrastructure.EFCore.Helpers;
+using Infrastructure.EFCore.Service;
+using Infrastructure.Main.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Linq.Expressions;
@@ -18,12 +22,6 @@ namespace Infrastructure.EFCore.Repository
             _context = context;
             _entity = context.Set<TEntity>();
             _cache = cache;
-        }
-
-        public async Task<List<TEntity>> FindAllAsync(CancellationToken cancellationToken = default)
-        {
-            var entities = await _entity.ToListAsync(cancellationToken: cancellationToken);
-            return entities;
         }
 
         public async Task<TEntity> FindByIdAsync(Guid id, CancellationToken cancellationToken = default)
@@ -73,7 +71,30 @@ namespace Infrastructure.EFCore.Repository
 
             return await query.ToListAsync();
         }
-        public async Task<List<TEntity>> FindAllAsync( params string[] properties)
+
+        public async Task<PaginationResponse<List<TEntity>>> FindPageAsync(PaginationRequest request, string route, IUriService uriService)
+        {
+            var validFilter = new PaginationRequest(request.PageNumber, request.PageSize, request.Status);
+
+            IQueryable<TEntity> query = _entity;
+
+            if (request.Status != StatusEnum.All)
+            {
+                query = query.Where(e => e.Enable == (request.Status == StatusEnum.Enable));
+            }
+
+            int totalRecords = await query.CountAsync();
+
+            var lists = await query
+                .OrderByDescending(e => e.UpdatedAt)
+                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .Take(validFilter.PageSize)
+                .ToListAsync();
+
+            return PaginationHelper<TEntity>.GeneratePaginationResponse(lists, validFilter, uriService, route);
+        }
+
+        public async Task<List<TEntity>> FindAllAsync(params string[] properties)
         {
             IQueryable<TEntity> query = _entity;
 
@@ -114,12 +135,25 @@ namespace Infrastructure.EFCore.Repository
 
         public async Task<List<TEntity>> BulkEditAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
         {
+            var ids = entities.Select(e => e.Id).ToList();
+
+            var existingEntities = await _entity.Where(e => ids.Contains(e.Id)).ToListAsync(cancellationToken);
+
             foreach (var entity in entities)
             {
-                var ent = _entity.Where(e => e.Id == entity.Id).FirstOrDefault();
-                var entry = _context.Entry(entity);
-                entry.State = EntityState.Modified;
+                var existingEntity = existingEntities.FirstOrDefault(e => e.Id == entity.Id);
+
+                if (existingEntity != null)
+                {
+                    _context.Entry(existingEntity).CurrentValues.SetValues(entity);
+                }
+                else
+                {
+                    _context.Attach(entity);
+                    _context.Entry(entity).State = EntityState.Modified;
+                }
             }
+
             await _context.SaveChangesAsync(cancellationToken);
 
             return entities;

@@ -1,6 +1,7 @@
 using AuthenService.Infrastructure;
 using Infrastructure.EFCore.Extensions;
 using Infrastructure.EFCore.Repository;
+using Infrastructure.EFCore.Service;
 using Infrastructure.OAuth2.Data;
 using Infrastructure.OAuth2.Data.Services;
 using Infrastructure.OAuth2.Models;
@@ -23,6 +24,7 @@ builder.Services.AddSqlServerDbContext<OAuth2Context>(configuration.GetConnectio
 builder.Services.AddScoped<IAuthenticateService, AuthenticateService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRepository<User>, OAuth2Repository<User>>();
+builder.Services.AddSingleton<IUriService, UriService>();
 
 var app = builder.Build();
 

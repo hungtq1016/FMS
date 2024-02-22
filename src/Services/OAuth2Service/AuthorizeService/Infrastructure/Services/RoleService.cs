@@ -19,8 +19,8 @@ namespace AuthorizeService.Infrastructure.Services
     {
         private readonly IRepository<Group> _groupRepository;
 
-        public RoleService(IRepository<Group> groupRepository, IRepository<Role> roleRepository, IMapper mapper)
-            : base(roleRepository, mapper)
+        public RoleService(IRepository<Group> groupRepository, IRepository<Role> roleRepository, IMapper mapper, IUriService uriService)
+            : base(roleRepository, mapper, uriService)
         {
             _groupRepository = groupRepository;
         }

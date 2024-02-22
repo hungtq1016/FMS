@@ -24,7 +24,7 @@ namespace Infrastructure.EFCore.Service
         private readonly IRepository<TEntity> _repository;
         private readonly IMapper _mapper;
 
-        public FileService(IRepository<TEntity> repository, IMapper mapper) : base(repository, mapper)
+        public FileService(IRepository<TEntity> repository, IMapper mapper, IUriService uriService) : base(repository, mapper, uriService)
         {
             _repository = repository;
             _mapper = mapper;

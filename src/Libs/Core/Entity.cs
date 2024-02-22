@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
+﻿
 namespace Core
 {
     public interface IEntity
@@ -24,6 +23,7 @@ namespace Core
     public abstract class EntityRequest
     {
         public Guid Id { get; set; } = Guid.NewGuid();
+        public bool Enable { get; set; }
     }
 
     public class AbstractFile : Entity

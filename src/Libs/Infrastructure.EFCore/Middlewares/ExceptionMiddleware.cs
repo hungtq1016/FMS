@@ -24,7 +24,7 @@ namespace Infrastructure.EFCore.Middlewares
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
-                await HandleExceptionAsync(httpContext);
+               /* await HandleExceptionAsync(httpContext);*/
             };
         }
 

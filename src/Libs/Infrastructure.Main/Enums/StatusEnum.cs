@@ -1,9 +1,9 @@
 ﻿namespace Infrastructure.Main.Enums
 {
-    public enum StatusMessageEnum
+    public enum StatusEnum
     {
         All = 2,
-        Enalble = 1,
+        Enable = 1,
         Disable = 0
     }
 }
