@@ -18,10 +18,13 @@ namespace DocumentService.Infrastructure
     {
         private readonly IRepository<Document> _repository;
         private readonly IMapper _mapper;
-        public CDocumentService(IRepository<Document> repository, IMapper mapper) : base(repository, mapper)
+        private readonly IUriService _uriService;
+
+        public CDocumentService(IRepository<Document> repository, IMapper mapper, IUriService uriService) : base(repository, mapper, uriService)
         {
             _repository = repository;
             _mapper = mapper;
+            _uriService = uriService;
         }
 
         public async Task<Response<List<DocumentResponse>>> AddWithFlightId(Guid flightId, List<IFormFile> files)

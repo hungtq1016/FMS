@@ -1,8 +1,10 @@
 ﻿using Core;
 using Infrastructure.EFCore.Service;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Infrastructure.EFCore.Extensions
 {
@@ -20,6 +22,8 @@ namespace Infrastructure.EFCore.Extensions
                 });
             });
             services.AddScoped(typeof(IService<,,>), typeof(Service<,,>));
+            services.AddSingleton<IUriService, UriService>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return services;
         }
     }

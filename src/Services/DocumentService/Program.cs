@@ -4,7 +4,9 @@ using DocumentService.Models;
 using ImageService.Infrastructure.Features;
 using Infrastructure.EFCore.Extensions;
 using Infrastructure.EFCore.Repository;
+using Infrastructure.EFCore.Service;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -20,7 +22,6 @@ builder.Services.AddMemoryCache();
 builder.Services.AddJWT(configuration);
 builder.Services.AddSqlServerDbContext<DocumentContext>(configuration.GetConnectionString("documentDB"));
 builder.Services.AddCustomMapper<DocumentProfile>();
-
 builder.Services.AddScoped<IRepository<Document>, DocumentRepository>();
 builder.Services.AddScoped<IDocumentService,CDocumentService>();
 

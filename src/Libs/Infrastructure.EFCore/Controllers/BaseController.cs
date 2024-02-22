@@ -1,4 +1,5 @@
 ﻿using Core;
+using Infrastructure.EFCore.DTOs;
 using Infrastructure.EFCore.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,13 @@ namespace Infrastructure.EFCore.Controllers
         public virtual async Task<IActionResult> Get()
         {
             var result = await _service.FindAllAsync();
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpGet("page")]
+        public virtual async Task<IActionResult> GetPage([FromQuery] PaginationRequest request)
+        {
+            var result = await _service.FindPageAsync(request, Request.Path.Value!);
             return StatusCode(result.StatusCode, result);
         }
 
@@ -56,14 +64,14 @@ namespace Infrastructure.EFCore.Controllers
         }
 
         [HttpPut]
-        public virtual async Task<IActionResult> BulkPut([FromBody] List<TEntity> requests)
+        public virtual async Task<IActionResult> BulkPut([FromBody] List<TRequest> requests)
         {
             var result = await _service.BulkEditAsync(requests);
             return StatusCode(result.StatusCode, result);
         }
 
         [HttpDelete]
-        public virtual async Task<IActionResult> BulkDelete([FromBody] List<TEntity> request)
+        public virtual async Task<IActionResult> BulkDelete([FromBody] List<TRequest> request)
         {
             var result = await _service.BulkDeleteAsync(request);
             return StatusCode(result.StatusCode, result);

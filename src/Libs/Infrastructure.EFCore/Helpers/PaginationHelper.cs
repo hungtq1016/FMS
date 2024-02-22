@@ -1,30 +1,46 @@
 ﻿using Infrastructure.EFCore.DTOs;
 using Infrastructure.EFCore.Service;
+using Infrastructure.Main.Enums;
 
 namespace Infrastructure.EFCore.Helpers
 {
-    public class PaginationHelper
+    public class PaginationHelper<TEntity>
     {
-        public static PaginationResponse<List<T>> PaginationGeneration<T>(List<T> data, PaginationRequest request, IUriService util, string route)
+        public static PaginationResponse<List<TEntity>> GeneratePaginationResponse(List<TEntity> data, PaginationRequest request, IUriService util, string route)
         {
             int totalRecords = data.Count();
-
-            var response = new PaginationResponse<List<T>>(data, request.PageNumber, request.PageSize);
-
             int totalPages = totalRecords / request.PageSize;
 
-            response.PreviousPage =
-                request.PageNumber > 1
-                ? util.GetPageUri(new PaginationRequest(request.PageNumber - 1, request.PageSize), route)
-                : null;
+            var response = new PaginationResponse<List<TEntity>>(data, request.PageNumber, request.PageSize);
 
-            response.NextPage =
-                request.PageNumber < totalPages
-                ? util.GetPageUri(new PaginationRequest(request.PageNumber + 1, request.PageSize), route)
-                : null;
+            if (request.Status != StatusEnum.All)
+            {
+                response.PreviousPage = (request.PageNumber > 1)
+                    ? util.GetPageUri(new PaginationRequest(request.PageNumber - 1, request.PageSize, request.Status), route)
+                    : null;
 
-            response.FirstPage = util.GetPageUri(new PaginationRequest(1, request.PageSize), route);
-            response.LastPage = util.GetPageUri(new PaginationRequest(totalPages, request.PageSize), route);
+                response.NextPage = (request.PageNumber < totalPages)
+                    ? util.GetPageUri(new PaginationRequest(request.PageNumber + 1, request.PageSize, request.Status), route)
+                    : null;
+            }
+            else
+            {
+                response.PreviousPage = (request.PageNumber > 1)
+                    ? util.GetPageUri(new PaginationRequest(request.PageNumber - 1, request.PageSize), route)
+                    : null;
+
+                response.NextPage = (request.PageNumber < totalPages)
+                    ? util.GetPageUri(new PaginationRequest(request.PageNumber + 1, request.PageSize), route)
+                    : null;
+            }
+
+            response.FirstPage = (request.Status != StatusEnum.All)
+                ? util.GetPageUri(new PaginationRequest(1, request.PageSize, request.Status), route)
+                : util.GetPageUri(new PaginationRequest(1, request.PageSize), route);
+
+            response.LastPage = (request.Status != StatusEnum.All)
+                ? util.GetPageUri(new PaginationRequest(totalPages, request.PageSize, request.Status), route)
+                : util.GetPageUri(new PaginationRequest(totalPages, request.PageSize), route);
 
             response.TotalPages = totalPages;
             response.TotalRecords = totalRecords;
