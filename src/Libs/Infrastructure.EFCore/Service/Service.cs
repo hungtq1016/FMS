@@ -23,7 +23,7 @@ namespace Infrastructure.EFCore.Service
         public async Task<Response<PaginationResponse<List<TResponse>>>> FindPageAsync(PaginationRequest request, string route)
         {
             var entities = await _repository.FindPageAsync(request, route, _uriService);
-
+    
             if (entities is null)
                 return ResponseHelper.CreateNotFoundResponse<PaginationResponse<List<TResponse>>>(null);
 

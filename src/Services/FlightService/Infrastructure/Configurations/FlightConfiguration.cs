@@ -28,6 +28,18 @@ namespace FlightService.Infrastructure.Configurations
                 .HasDefaultValue(true)
                 .IsRequired(true);
 
+            builder.Property(flight => flight.Status)
+               .HasDefaultValue(1)
+               .IsRequired(true);
+
+            builder.Property(flight => flight.DepartureDate).HasColumnType("datetime")
+                .HasDefaultValueSql(Constants.DateTimeAlgorithm)
+                .IsRequired(true);
+
+            builder.Property(flight => flight.ArrivalDate).HasColumnType("datetime")
+                .HasDefaultValueSql(Constants.DateTimeAlgorithm)
+                .IsRequired(true);
+
             builder.HasOne(flight => flight.Loading)
                 .WithMany(airport => airport.LoadingFlights)
                 .HasForeignKey(flight => flight.LoadingId)

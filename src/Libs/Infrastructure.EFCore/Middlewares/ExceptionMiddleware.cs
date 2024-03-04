@@ -24,7 +24,7 @@ namespace Infrastructure.EFCore.Middlewares
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
-               /* await HandleExceptionAsync(httpContext);*/
+                await HandleExceptionAsync(httpContext);
             };
         }
 
@@ -35,11 +35,12 @@ namespace Infrastructure.EFCore.Middlewares
 
             return httpContext.Response.WriteAsync(new Response<bool>
             {
-                StatusCode = (ushort)httpContext.Response.StatusCode,
+                StatusCode = httpContext.Response.StatusCode,
                 Data = false,
                 IsError = true,
                 Message = "Internal Server Error!"
-            }.ToString()!);
+            }.ToJson());
+
         }
     }
 }
