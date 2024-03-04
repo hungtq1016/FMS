@@ -4,6 +4,7 @@ using FlightService.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlightService.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(FlightContext))]
-    partial class FlightContextModelSnapshot : ModelSnapshot
+    [Migration("20240304030402_update-flight")]
+    partial class updateflight
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,20 +76,13 @@ namespace FlightService.Infrastructure.Data.Migrations
                         .HasColumnType("varchar(36)")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<DateTime>("ArrivalDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("GETDATE()");
-
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<DateTime>("DepartureDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("GETDATE()");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("Enable")
                         .ValueGeneratedOnAdd()
@@ -98,18 +93,22 @@ namespace FlightService.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(36)");
 
+                    b.Property<DateTime>("LoadingTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Route")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasColumnType("int");
 
                     b.Property<string>("UnloadingId")
                         .IsRequired()
                         .HasColumnType("varchar(36)");
+
+                    b.Property<DateTime>("UnloadingTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
