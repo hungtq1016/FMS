@@ -6,7 +6,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5105
         }
       ],
       "UpstreamPathTemplate": "/auth/reset-password",
@@ -19,7 +19,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5105
         }
       ],
       "UpstreamPathTemplate": "/auth/login",
@@ -32,7 +32,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/roles",
@@ -45,7 +45,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/roles/page",
@@ -58,7 +58,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/roles/{id}",
@@ -71,7 +71,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/groups",
@@ -84,7 +84,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/groups/{id}",
@@ -97,7 +97,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/groups/page",
@@ -110,7 +110,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/permissions",
@@ -123,7 +123,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/permissions/{id}",
@@ -136,7 +136,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/permissions/page",
@@ -149,7 +149,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/assignments",
@@ -162,7 +162,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/assignments/page",
@@ -175,7 +175,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/assignments/{id}",
@@ -188,7 +188,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5007
+          "Port": 5103
         }
       ],
       "UpstreamPathTemplate": "/images",
@@ -201,7 +201,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5007
+          "Port": 5103
         }
       ],
       "UpstreamPathTemplate": "/Images/page",
@@ -214,7 +214,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5007
+          "Port": 5103
         }
       ],
       "UpstreamPathTemplate": "/images/{id}",
@@ -227,7 +227,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5007
+          "Port": 5103
         }
       ],
       "UpstreamPathTemplate": "/images/{path}",
@@ -240,7 +240,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5009
+          "Port": 5101
         }
       ],
       "UpstreamPathTemplate": "/documents",
@@ -253,7 +253,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5009
+          "Port": 5101
         }
       ],
       "UpstreamPathTemplate": "/Documents/page",
@@ -266,7 +266,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5009
+          "Port": 5101
         }
       ],
       "UpstreamPathTemplate": "/documents/{id}",
@@ -279,7 +279,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5009
+          "Port": 5101
         }
       ],
       "UpstreamPathTemplate": "/documents/{flightId}",
@@ -292,7 +292,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5005
+          "Port": 5104
         }
       ],
       "UpstreamPathTemplate": "/users",
@@ -305,7 +305,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5005
+          "Port": 5104
         }
       ],
       "UpstreamPathTemplate": "/Users/page",
@@ -318,7 +318,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5005
+          "Port": 5104
         }
       ],
       "UpstreamPathTemplate": "/users/{id}",
@@ -331,7 +331,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5102
         }
       ],
       "UpstreamPathTemplate": "/flights",
@@ -344,7 +344,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5102
         }
       ],
       "UpstreamPathTemplate": "/flights/page",
@@ -357,7 +357,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5102
         }
       ],
       "UpstreamPathTemplate": "/flights/{id}",
@@ -370,7 +370,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5102
         }
       ],
       "UpstreamPathTemplate": "/airports",
@@ -383,7 +383,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5102
         }
       ],
       "UpstreamPathTemplate": "/airports/page",
@@ -396,7 +396,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5102
         }
       ],
       "UpstreamPathTemplate": "/airports/{id}",
@@ -409,7 +409,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5003
+          "Port": 5106
         }
       ],
       "UpstreamPathTemplate": "/roles/user/{userId}",
@@ -423,7 +423,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5005
+          "Port": 5104
         }
       ],
       "UpstreamPathTemplate": "/users/info/{userId}",
@@ -462,7 +462,7 @@
         {
           "Name": "Role API",
           "Version": "v1",
-          "Url": "https://localhost:5003/swagger/v1/swagger.json"
+          "Url": "https://localhost:5106/swagger/v1/swagger.json"
         }
       ]
     },
@@ -472,7 +472,7 @@
         {
           "Name": "Group API",
           "Version": "v1",
-          "Url": "https://localhost:5003/swagger/v1/swagger.json"
+          "Url": "https://localhost:5106/swagger/v1/swagger.json"
         }
       ]
     },
@@ -482,7 +482,7 @@
         {
           "Name": "Permission API",
           "Version": "v1",
-          "Url": "https://localhost:5003/swagger/v1/swagger.json"
+          "Url": "https://localhost:5106/swagger/v1/swagger.json"
         }
       ]
     },
@@ -492,7 +492,7 @@
         {
           "Name": "Assignments API",
           "Version": "v1",
-          "Url": "https://localhost:5003/swagger/v1/swagger.json"
+          "Url": "https://localhost:5106/swagger/v1/swagger.json"
         }
       ]
     },
@@ -502,7 +502,7 @@
         {
           "Name": "User API",
           "Version": "v1",
-          "Url": "https://localhost:5005/swagger/v1/swagger.json"
+          "Url": "https://localhost:5104/swagger/v1/swagger.json"
         }
       ]
     },
@@ -512,7 +512,7 @@
         {
           "Name": "Image API",
           "Version": "v1",
-          "Url": "https://localhost:5007/swagger/v1/swagger.json"
+          "Url": "https://localhost:5103/swagger/v1/swagger.json"
         }
       ]
     },
@@ -522,7 +522,7 @@
         {
           "Name": "Document API",
           "Version": "v1",
-          "Url": "https://localhost:5009/swagger/v1/swagger.json"
+          "Url": "https://localhost:5101/swagger/v1/swagger.json"
         }
       ]
     },
@@ -532,7 +532,7 @@
         {
           "Name": "Flight API",
           "Version": "v1",
-          "Url": "https://localhost:5011/swagger/v1/swagger.json"
+          "Url": "https://localhost:5102/swagger/v1/swagger.json"
         }
       ]
     },
@@ -542,7 +542,7 @@
         {
           "Name": "Airport API",
           "Version": "v1",
-          "Url": "https://localhost:5011/swagger/v1/swagger.json"
+          "Url": "https://localhost:5102/swagger/v1/swagger.json"
         }
       ]
     }

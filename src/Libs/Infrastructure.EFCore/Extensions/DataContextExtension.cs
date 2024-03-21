@@ -1,6 +1,5 @@
-﻿using Core;
-using Infrastructure.EFCore.Service;
-using MediatR;
+﻿using Infrastructure.EFCore.Service;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
